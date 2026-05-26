@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-image: url('/com/mycompany/s2501/cozinha2.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.s2501.Cozinha.CozinhaController">
+
+    <children>
+        <Label layoutX="550.0" layoutY="100.0" text="" />
+        
+        <Button layoutX="1140.0" 
+                layoutY="20.0" 
+                onAction="#abrirInventario" 
+                text="🎒" />
+
+        <Button fx:id="olharbolo" 
+                layoutX="930.0" 
+                layoutY="380.0"
+                prefHeight="15.0" 
+                prefWidth="15.0" 
+                style="-fx-background-radius: 100em;                    
+                        -fx-min-width: 15px;                    
+                        -fx-min-height: 15px;                    
+                        -fx-max-width: 15px;                    
+                        -fx-max-height: 15px;                    
+                        -fx-padding: 0;                    
+                        -fx-background-color: #ffffff;">
+
+            <tooltip>
+                <Tooltip text="Ver o bolo" />
+            </tooltip>
+        </Button>
+        
+        <Button fx:id="abrirgeladeira" 
+                layoutX="380.0" 
+                layoutY="330.0" 
+                prefHeight="15.0" 
+                prefWidth="15.0" 
+                style="-fx-background-radius: 100em;                    
+                        -fx-min-width: 15px;                    
+                        -fx-min-height: 15px;                    
+                        -fx-max-width: 15px;                    
+                        -fx-max-height: 15px;                    
+                        -fx-padding: 0;                    
+                        -fx-background-color: #ffffff;">
+
+            <tooltip>
+                <Tooltip text="Abrir a geladeira" />
+            </tooltip>
+        </Button>
+        
+        <Button fx:id="abrirdespensa" 
+                layoutX="200.0" 
+                layoutY="340.0" 
+                prefHeight="15.0" 
+                prefWidth="15.0" 
+                style="-fx-background-radius: 100em;                    
+                        -fx-min-width: 15px;                    
+                        -fx-min-height: 15px;                    
+                        -fx-max-width: 15px;                    
+                        -fx-max-height: 15px;                    
+                        -fx-padding: 0;                    
+                        -fx-background-color: #ffffff;">
+
+            <tooltip>
+                <Tooltip text="Abrir a despensa" />
+            </tooltip>
+        </Button>
+        
+        <Button fx:id="verlouca"  
+                layoutX="740.0" 
+                layoutY="380.0" 
+                prefHeight="15.0" 
+                prefWidth="15.0" 
+                style="-fx-background-radius: 100em;                    
+                        -fx-min-width: 15px;                    
+                        -fx-min-height: 15px;                    
+                        -fx-max-width: 15px;                    
+                        -fx-max-height: 15px;                    
+                        -fx-padding: 0;                    
+                        -fx-background-color: #ffffff;">
+
+            <tooltip>
+                <Tooltip text="Ver a louça" />
+            </tooltip>
+        </Button>
+        
+        <Button fx:id="voltarcorredorp" 
+                layoutX="600.0" 
+                layoutY="780.0" 
+                onAction="#voltarcorredorp" 
+                prefHeight="15.0" 
+                prefWidth="15.0" 
+                style="-fx-background-radius: 100em;                    
+                        -fx-min-width: 15px;                    
+                        -fx-min-height: 15px;                    
+                        -fx-max-width: 15px;                    
+                        -fx-max-height: 15px;                    
+                        -fx-padding: 0;                    
+                        -fx-background-color: #ffffff;">
+
+            <tooltip>
+                <Tooltip text="Voltar ao corredor principal" />
+            </tooltip>
+        </Button>
+        
+        
+        
+        
+        
+    </children>
+</AnchorPane>
