@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 public class BanheiroController {
 
     @FXML
-    private void switchToPrimary() throws IOException {
+    private void abrirArmario() throws IOException {
         App.setRoot("primary");
     }
 }

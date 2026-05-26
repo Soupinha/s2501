@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 public class ChuveiroActController {
 
     @FXML
-    private void switchToPrimary() throws IOException {
+    private void abrir() throws IOException {
         App.setRoot("primary");
     }
 }
