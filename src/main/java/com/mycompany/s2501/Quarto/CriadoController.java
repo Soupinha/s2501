@@ -7,7 +7,18 @@ import javafx.fxml.FXML;
 public class CriadoController {
 
     @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
+    private void voltar() throws IOException {
+        App.setRoot("quarto");
+    }    
+    
+    @FXML
+    private void verdiario() throws IOException {
+        App.setRoot("diario");
     }
+    
+    @FXML
+    private void abrirInventario() {
+        App.toggleInventario();
+    }
+
 }

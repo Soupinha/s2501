@@ -19,12 +19,12 @@ private Label floatingText;
         App.setRoot("corredor");
     }
     @FXML
-    private void lerdiario() throws IOException {
+    private void ircriado() throws IOException {
         
-        App.setRoot("diario");
+        App.setRoot("criado");
     }
     @FXML
-    private void abrirarmario() throws IOException {
+    private void irarmario() throws IOException {
         
         App.setRoot("armarioq");
     }

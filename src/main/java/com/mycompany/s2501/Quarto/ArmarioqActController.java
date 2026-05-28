@@ -7,7 +7,17 @@ import javafx.fxml.FXML;
 public class ArmarioqActController {
 
     @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
+    private void voltar() throws IOException {
+        App.setRoot("quarto");
+    }    
+    
+    @FXML
+    private void fechararmario() throws IOException {
+        App.setRoot("armarioq");
+    }
+    
+    @FXML
+    private void abrirInventario() {
+        App.toggleInventario();
     }
 }
