@@ -11,4 +11,12 @@ package com.mycompany.s2501.Model;
  */
 public class Item {
 
+    private int id;
+
+    private String nome;
+
+    private String descricao;
+
+    private int pontos;
+
 }
