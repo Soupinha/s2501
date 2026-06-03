@@ -4,6 +4,7 @@ com/mycompany/s2501/Banheiro/CestoActController.class
 com/mycompany/s2501/Sala/BancadasController.class
 com/mycompany/s2501/Fora/FarmaciaController.class
 com/mycompany/s2501/Quarto/ArmarioqController.class
+com/mycompany/s2501/Model/Item.class
 com/mycompany/s2501/Corredor/QuartoTrancadoController.class
 com/mycompany/s2501/Banheiro/PiaController.class
 com/mycompany/s2501/MenuController.class
