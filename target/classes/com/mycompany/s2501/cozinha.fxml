@@ -15,28 +15,11 @@
                 layoutY="20.0" 
                 onAction="#abrirInventario" 
                 text="🎒" />
-
-        <Button fx:id="olharbolo" 
-                layoutX="930.0" 
-                layoutY="380.0"
-                prefHeight="15.0" 
-                prefWidth="15.0" 
-                style="-fx-background-radius: 100em;                    
-                        -fx-min-width: 15px;                    
-                        -fx-min-height: 15px;                    
-                        -fx-max-width: 15px;                    
-                        -fx-max-height: 15px;                    
-                        -fx-padding: 0;                    
-                        -fx-background-color: #ffffff;">
-
-            <tooltip>
-                <Tooltip text="Ver o bolo" />
-            </tooltip>
-        </Button>
         
-        <Button fx:id="abrirgeladeira" 
+        <Button fx:id="geladeira" 
                 layoutX="380.0" 
                 layoutY="330.0" 
+                onAction="#irgeladeira" 
                 prefHeight="15.0" 
                 prefWidth="15.0" 
                 style="-fx-background-radius: 100em;                    
@@ -52,7 +35,7 @@
             </tooltip>
         </Button>
         
-        <Button fx:id="abrirdespensa" 
+        <Button fx:id="despensa" 
                 layoutX="200.0" 
                 layoutY="340.0" 
                 prefHeight="15.0" 
@@ -70,9 +53,10 @@
             </tooltip>
         </Button>
         
-        <Button fx:id="verlouca"  
+        <Button fx:id="bancadac"  
                 layoutX="740.0" 
                 layoutY="380.0" 
+                onAction="#irbancadac" 
                 prefHeight="15.0" 
                 prefWidth="15.0" 
                 style="-fx-background-radius: 100em;                    
@@ -84,14 +68,14 @@
                         -fx-background-color: #ffffff;">
 
             <tooltip>
-                <Tooltip text="Ver a louça" />
+                <Tooltip text="Ver bancada" />
             </tooltip>
         </Button>
         
-        <Button fx:id="voltarcorredorp" 
+        <Button fx:id="voltar" 
                 layoutX="600.0" 
                 layoutY="780.0" 
-                onAction="#voltarcorredorp" 
+                onAction="#voltar" 
                 prefHeight="15.0" 
                 prefWidth="15.0" 
                 style="-fx-background-radius: 100em;                    

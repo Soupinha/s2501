@@ -19,7 +19,7 @@ public class CorredorController {
         App.setRoot("corredorprincipal");
     }
     @FXML
-    private void voltarquarto() throws IOException {
+    private void voltar() throws IOException {
         App.setRoot("quarto");
     }
     

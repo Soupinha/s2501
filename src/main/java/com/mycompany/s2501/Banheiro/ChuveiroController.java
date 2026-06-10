@@ -6,8 +6,17 @@ import javafx.fxml.FXML;
 
 public class ChuveiroController {
 
+        @FXML
+    private void fecharchuveiro() throws IOException {
+        App.setRoot("chuveiroact");
+    }
     @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
+    private void voltar() throws IOException {
+        App.setRoot("banheiro");
+    }
+    
+    @FXML
+    private void abrirInventario() {
+        App.toggleInventario();
     }
 }

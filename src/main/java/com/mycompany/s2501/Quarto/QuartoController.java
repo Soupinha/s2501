@@ -34,7 +34,6 @@ private Label floatingText;
 
     // Frases
     private String[] falas = {
-        "Esse cheiro...",
         "Eu conheço esse lugar?",
         "O que aconteceu aqui?"
     };
@@ -98,8 +97,6 @@ private Label floatingText;
             botaoContinuar.setVisible(false);
         }
     }
-    
-  
     
     @FXML
     private void abrirInventario() {

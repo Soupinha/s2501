@@ -1,18 +1,19 @@
-package com.mycompany.s2501.Banheiro;
+
+package com.mycompany.s2501.Cozinha;
 
 import com.mycompany.s2501.App;
 import java.io.IOException;
 import javafx.fxml.FXML;
 
-public class ChuveiroActController {
+public class BoloController {
 
-       @FXML
-    private void abrirchuveiro() throws IOException {
-        App.setRoot("chuveiro");
-    }
-    @FXML
+      @FXML
     private void voltar() throws IOException {
-        App.setRoot("banheiro");
+        App.setRoot("bancadac");
+    }
+     @FXML
+    private void irrecado() throws IOException {
+        App.setRoot("recado");
     }
     
     @FXML

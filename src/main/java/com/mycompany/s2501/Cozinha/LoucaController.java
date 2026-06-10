@@ -7,7 +7,13 @@ import javafx.fxml.FXML;
 public class LoucaController {
 
     @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
+    private void voltar() throws IOException {
+        App.setRoot("bancadac");
+    }
+    
+    
+    @FXML
+    private void abrirInventario() {
+        App.toggleInventario();
     }
 }

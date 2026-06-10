@@ -18,7 +18,7 @@
         <Button fx:id="olharespelho" 
                 layoutX="605.0" 
                 layoutY="280.0" 
-                onAction="#espelo"
+                onAction="#espelho"
                 prefHeight="15.0" 
                 prefWidth="15.0" 
                 style="-fx-background-radius: 100em;                    

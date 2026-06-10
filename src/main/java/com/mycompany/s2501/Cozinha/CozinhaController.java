@@ -5,9 +5,17 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 
 public class CozinhaController {
-
+     @FXML
+    private void irgeladeira() throws IOException {
+        App.setRoot("geladeira");
+    }
+     @FXML
+    private void irbancadac() throws IOException {
+        App.setRoot("bancadac");
+    }
+  
     @FXML
-    private void voltarcorredorp() throws IOException {
+    private void voltar() throws IOException {
         App.setRoot("corredorprincipal");
     }
     

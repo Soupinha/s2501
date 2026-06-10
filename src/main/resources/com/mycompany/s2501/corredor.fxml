@@ -76,7 +76,7 @@
         <Button fx:id="voltarquarto" 
                 layoutX="600.0" 
                 layoutY="780.0" 
-                onAction="#voltarquarto" 
+                onAction="#voltar" 
                 prefHeight="15.0" 
                 prefWidth="15.0" 
                 style="-fx-background-radius: 100em;                    
