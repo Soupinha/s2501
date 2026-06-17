@@ -6,7 +6,10 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-image: url('/com/mycompany/s2501/corredor1.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.s2501.Corredor.CorredorController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" 
+            style="-fx-background-image: url('/com/mycompany/s2501/corredor1.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" 
+            xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.mycompany.s2501.Corredor.CorredorController">
 
     <children>
         <Label layoutX="550.0" layoutY="100.0" text="" />
@@ -73,7 +76,7 @@
             </tooltip>
         </Button>
         
-        <Button fx:id="voltarquarto" 
+        <Button fx:id="voltar" 
                 layoutX="600.0" 
                 layoutY="780.0" 
                 onAction="#voltar" 

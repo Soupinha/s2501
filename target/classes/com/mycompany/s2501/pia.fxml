@@ -17,7 +17,7 @@
 
         <Button fx:id="olharespelho" 
                 layoutX="605.0" 
-                layoutY="280.0" 
+                layoutY="200.0" 
                 onAction="#espelho"
                 prefHeight="15.0" 
                 prefWidth="15.0" 
@@ -35,7 +35,7 @@
         </Button>
         
         <Button fx:id="abrirarmario" 
-                layoutX="550.0" 
+                layoutX="520.0" 
                 layoutY="680.0" 
                 onAction="#abrirarmario"
                 prefHeight="15.0" 
@@ -54,7 +54,7 @@
         </Button>
         
         <Button fx:id="abrirgaveta" 
-                layoutX="550.0" 
+                layoutX="520.0" 
                 layoutY="540.0" 
                 onAction="#abrirgaveta"
                 prefHeight="15.0" 
@@ -75,8 +75,8 @@
         
         
         <Button fx:id="voltar" 
-                layoutX="680.0" 
-                layoutY="300.0" 
+                layoutX="600.0" 
+                layoutY="760.0" 
                 onAction="#voltar" 
                 prefHeight="15.0" 
                 prefWidth="15.0" 

@@ -5,9 +5,17 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 
 public class CestoController {
-
     @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
+    private void esvaziar() throws IOException {
+        App.setRoot("cestoact");
+    }
+    @FXML
+    private void voltar() throws IOException {
+        App.setRoot("banheiro");
+    }
+    
+    @FXML
+    private void abrirInventario() {
+        App.toggleInventario();
     }
 }

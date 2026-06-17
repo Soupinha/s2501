@@ -5,7 +5,9 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-image: url('/com/mycompany/s2501/banheiro1.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.s2501.Banheiro.BanheiroController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" 
+            style="-fx-background-image: url('/com/mycompany/s2501/banheiro1.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" 
+            xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.s2501.Banheiro.BanheiroController">
  
     <children>
         <Label text="" />
@@ -15,8 +17,8 @@
                 text="🎒" />
 
         <Button fx:id="pia" 
-                layoutX="485.0" 
-                layoutY="400.0" 
+                layoutX="430.0" 
+                layoutY="360.0" 
                 onAction="#irpia"
                 prefHeight="15.0" 
                 prefWidth="15.0" 
@@ -34,8 +36,8 @@
         </Button>
         
         <Button fx:id="chuveiro" 
-                layoutX="705.0" 
-                layoutY="410.0" 
+                layoutX="755.0" 
+                layoutY="400.0" 
                 onAction="#irchuveiro"
                 prefHeight="15.0" 
                 prefWidth="15.0" 
@@ -53,8 +55,8 @@
         </Button>
         
         <Button fx:id="cesto" 
-                layoutX="505.0" 
-                layoutY="410.0" 
+                layoutX="225.0" 
+                layoutY="430.0" 
                 onAction="#ircesto"
                 prefHeight="15.0" 
                 prefWidth="15.0" 
@@ -73,8 +75,8 @@
         
         
         <Button fx:id="voltar" 
-                layoutX="50.0" 
-                layoutY="700.0" 
+                layoutX="30.0" 
+                layoutY="680.0" 
                 onAction="#voltar" 
                 prefHeight="15.0" 
                 prefWidth="15.0" 

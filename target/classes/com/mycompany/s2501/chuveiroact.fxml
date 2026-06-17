@@ -5,7 +5,10 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-image: url('/com/mycompany/s2501/chuveiroact1.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.s2501.Banheiro.ChuveiroActController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" 
+            style="-fx-background-image: url('/com/mycompany/s2501/chuveiroact1.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" 
+            xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.mycompany.s2501.Banheiro.ChuveiroActController">
  
     <children>
         <Label text="" />
@@ -17,7 +20,7 @@
         <Button fx:id="chuveiro" 
                 layoutX="705.0" 
                 layoutY="410.0" 
-                onAction="#abrirchuveiro"
+                onAction="#abrir"
                 prefHeight="15.0" 
                 prefWidth="15.0" 
                 style="-fx-background-radius: 100em;                    
@@ -36,8 +39,8 @@
    
         
         <Button fx:id="voltar" 
-                layoutX="50.0" 
-                layoutY="700.0" 
+                layoutX="600.0" 
+                layoutY="760.0" 
                 onAction="#voltar" 
                 prefHeight="15.0" 
                 prefWidth="15.0" 

@@ -15,9 +15,9 @@
                 text="🎒" />
 
         <Button fx:id="fechararmario" 
-                layoutX="505.0" 
-                layoutY="410.0" 
-                OnAction="#fechararmario"
+                layoutX="325.0" 
+                layoutY="480.0" 
+                onAction="#fechararmario"
                 prefHeight="15.0" 
                 prefWidth="15.0" 
                 style="-fx-background-radius: 100em;                    
@@ -35,8 +35,8 @@
         
         
         <Button fx:id="voltar" 
-                layoutX="680.0" 
-                layoutY="300.0" 
+                layoutX="600.0" 
+                layoutY="760.0" 
                 onAction="#voltar" 
                 prefHeight="15.0" 
                 prefWidth="15.0" 

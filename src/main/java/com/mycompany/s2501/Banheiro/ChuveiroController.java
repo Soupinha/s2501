@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 public class ChuveiroController {
 
         @FXML
-    private void fecharchuveiro() throws IOException {
+    private void fechar() throws IOException {
         App.setRoot("chuveiroact");
     }
     @FXML
