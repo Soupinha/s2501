@@ -6,10 +6,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" 
-            style="-fx-background-image: url('/com/mycompany/s2501/quarto2.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" 
+            style="-fx-background-image: url('/com/mycompany/s2501/jogotlp/quarto2.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" 
             xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" 
             fx:controller="com.mycompany.s2501.Quarto.QuartoController">
-
+            <!--Tudo okay-->
     <children>
         <Label layoutX="550.0" layoutY="100.0" text="" />
         
@@ -33,7 +33,7 @@
                         -fx-background-color: #ffffff;">
 
             <tooltip>
-                <Tooltip text="Ir criado" />
+                <Tooltip text="Ver o criado-mudo" />
             </tooltip>
         </Button>
         
@@ -71,7 +71,7 @@
                         -fx-background-color: #ffffff;">
 
             <tooltip>
-                <Tooltip text="Ver armário" />
+                <Tooltip text="Ver o armário" />
             </tooltip>
         </Button>
         

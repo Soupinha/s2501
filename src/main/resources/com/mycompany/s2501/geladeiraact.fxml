@@ -1,21 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Button?>
-<?import javafx.geometry.Insets?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.s2501.Cozinha.GeladeiraActController">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" 
+            style="-fx-background-image: url('/com/mycompany/s2501/jogotlp/geladeiraact1.png');       -fx-background-size: cover;        -fx-background-repeat: no-repeat;" 
+            xmlns="http://javafx.com/javafx/26" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.mycompany.s2501.Cozinha.GeladeiraActController">
+
     <children>
-        <Label text="Secondary View" />
-        <Button 
-            prefHeight="15.0" 
-            fx:id="secondaryButton" onAction="#switchToPrimary"
-            prefWidth="15.0" 
-            style="-fx-background-radius: 100em; -fx-min-width: 15px; -fx-min-height: 15px; -fx-max-width: 15px; -fx-max-height: 15px; -fx-padding: 0; -fx-background-color: #ffffff; " 
-        />
+        <Label layoutX="550.0" layoutY="100.0" text="" />
+        
+        <Button layoutX="1140.0" 
+                layoutY="20.0" 
+                onAction="#abrirInventario" 
+                text="🎒" />
+        
+        <Button fx:id="geladeira" 
+                layoutX="255.0" 
+                layoutY="575.0" 
+                onAction="#fechar" 
+                prefHeight="15.0" 
+                prefWidth="15.0" 
+                style="-fx-background-radius: 100em;                    
+                        -fx-min-width: 15px;                    
+                        -fx-min-height: 15px;                    
+                        -fx-max-width: 15px;                    
+                        -fx-max-height: 15px;                    
+                        -fx-padding: 0;                    
+                        -fx-background-color: #ffffff;">
+
+            <tooltip>
+                <Tooltip text="Abrir a geladeira" />
+            </tooltip>
+            
+        </Button>
+        
+        <Button fx:id="voltar" 
+                layoutX="600.0" 
+                layoutY="780.0" 
+                onAction="#voltar" 
+                prefHeight="15.0" 
+                prefWidth="15.0" 
+                style="-fx-background-radius: 100em;                    
+                        -fx-min-width: 15px;                    
+                        -fx-min-height: 15px;                    
+                        -fx-max-width: 15px;                    
+                        -fx-max-height: 15px;                    
+                        -fx-padding: 0;                    
+                        -fx-background-color: #ffffff;">
+
+            <tooltip>
+                <Tooltip text="Voltar" />
+            </tooltip>
+        </Button>
+        
+        
     </children>
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-</VBox>
+</AnchorPane>

@@ -5,8 +5,10 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-image: url('/com/mycompany/s2501/sala2.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.s2501.Sala.SalaController">
-
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-image: url('/com/mycompany/s2501/jogotlp/sala2.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" 
+            xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.mycompany.s2501.Sala.SalaController">
+            <!--Tudo okay-->
     <children>
         <Label layoutX="550.0" layoutY="100.0" text="" />
         
@@ -15,10 +17,10 @@
                 onAction="#abrirInventario" 
                 text="🎒" />
 
-        <Button fx:id="verfoto" 
+        <Button fx:id="foto" 
                 layoutX="1120.0" 
                 layoutY="410.0"
-                onAction="#verfoto" 
+                onAction="#verf" 
                 prefHeight="15.0" 
                 prefWidth="15.0" 
                 style="-fx-background-radius: 100em;                    
@@ -34,10 +36,10 @@
             </tooltip>
         </Button>
         
-        <Button fx:id="verjanela" 
+        <Button fx:id="janela" 
                 layoutX="370.0" 
                 layoutY="400.0" 
-                onAction="#verjanela" 
+                onAction="#verj" 
                 prefHeight="15.0" 
                 prefWidth="15.0" 
                 style="-fx-background-radius: 100em;                    
@@ -53,10 +55,10 @@
             </tooltip>
         </Button>
         
-        <Button fx:id="sentarsofa" 
-                layoutX="100.0" 
-                layoutY="440.0" 
-                onAction="#sentarsofa" 
+        <Button fx:id="sofa" 
+                layoutX="700.0" 
+                layoutY="580.0" 
+                onAction="#sentar" 
                 prefHeight="15.0" 
                 prefWidth="15.0" 
                 style="-fx-background-radius: 100em;                    
@@ -72,10 +74,10 @@
             </tooltip>
         </Button>
         
-        <Button fx:id="abrirarmario"  
+        <Button fx:id="armario"  
                 layoutX="760.0" 
                 layoutY="455.0" 
-                onAction="#abrirarmario"
+                onAction="#abrir"
                 prefHeight="15.0" 
                 prefWidth="15.0" 
                 style="-fx-background-radius: 100em;                    
@@ -91,10 +93,10 @@
             </tooltip>
         </Button>
         
-        <Button fx:id="voltarcorredorp" 
+        <Button fx:id="voltar" 
                 layoutX="600.0" 
                 layoutY="780.0" 
-                onAction="#voltarcorredorp" 
+                onAction="#voltar" 
                 prefHeight="15.0" 
                 prefWidth="15.0" 
                 style="-fx-background-radius: 100em;                    

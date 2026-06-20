@@ -9,7 +9,7 @@ import javafx.animation.Timeline;
 import javafx.scene.control.Button;
 import javafx.util.Duration;
 
-
+//tudo okay
 public class QuartoController {
     @FXML
 private Label floatingText;

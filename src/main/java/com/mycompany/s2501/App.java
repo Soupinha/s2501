@@ -44,7 +44,7 @@ public class App extends Application {
 
                 inventarioStage = new Stage();
                 inventarioStage.setTitle("Inventário");
-                inventarioStage.setScene(new Scene(root, 400, 600));
+                inventarioStage.setScene(new Scene(root, 600, 400));
                 inventarioStage.setResizable(false);
 
                 inventarioStage.setOnHidden(event -> {

@@ -15,7 +15,7 @@ public class ForaController {
         App.setRoot("rua1");
     }
     @FXML
-    private void voltarcorredorp() throws IOException {
+    private void voltar() throws IOException {
         App.setRoot("corredorprincipal");
     }
     @FXML

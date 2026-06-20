@@ -7,7 +7,11 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-image: url('/com/mycompany/s2501/menu1.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.s2501.MenuController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" 
+            style="-fx-background-image: url('/com/mycompany/s2501/jogotlp/menu1.png');        
+-fx-background-size: cover;        -fx-background-repeat: no-repeat;" 
+            xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.mycompany.s2501.MenuController">
  
     <children>
 
@@ -44,10 +48,25 @@
       >
          
       </Button>
+      
+      <Button fx:id="ranking"
+        layoutX="520.0"
+        layoutY="580.0"
+        prefHeight="42.0"
+        prefWidth="170.0"
+        text="RANKING"
+        style="-fx-background-color: transparent;
+               -fx-text-fill: #d7d2c8;
+               -fx-border-color: #6e6558;
+               -fx-border-width: 0 0 1.5 0;
+               -fx-font-family: 'Times New Roman';
+               -fx-font-size: 20px;
+               -fx-cursor: hand;" >
+       </Button>
 
       <Button fx:id="encerrar"
         layoutX="520.0"
-        layoutY="580.0"
+        layoutY="630.0"
         prefHeight="42.0"
         prefWidth="170.0"
         text="ENCERRAR"

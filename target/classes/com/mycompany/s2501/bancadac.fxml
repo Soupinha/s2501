@@ -6,7 +6,10 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-image: url('/com/mycompany/s2501/bancadac1.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.s2501.Cozinha.BancadacController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" 
+            style="-fx-background-image: url('/com/mycompany/s2501/jogotlp/bancadac1.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" 
+            xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.mycompany.s2501.Cozinha.BancadacController">
 
     <children>
         <Label layoutX="550.0" layoutY="100.0" text="" />
@@ -17,7 +20,7 @@
                 text="🎒" />
 
         <Button fx:id="bolo" 
-                layoutX="930.0" 
+                layoutX="1030.0" 
                 layoutY="380.0"
                 onAction="#irbolo" 
                 prefHeight="15.0" 
@@ -36,8 +39,8 @@
         </Button>
         
         <Button fx:id="louca"  
-                layoutX="740.0" 
-                layoutY="380.0" 
+                layoutX="580.0" 
+                layoutY="480.0" 
                 onAction="#irlouca" 
                 prefHeight="15.0" 
                 prefWidth="15.0" 

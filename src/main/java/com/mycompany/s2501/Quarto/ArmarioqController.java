@@ -12,7 +12,7 @@ public class ArmarioqController {
     }    
     
     @FXML
-    private void abrirarmario() throws IOException {
+    private void abrir() throws IOException {
         App.setRoot("armarioqact");
     }
     

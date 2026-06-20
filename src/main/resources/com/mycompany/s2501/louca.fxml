@@ -6,7 +6,11 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-image: url('/com/mycompany/s2501/louca1.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.s2501.Cozinha.LoucaController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" 
+            style="-fx-background-image: url('/com/mycompany/s2501/jogotlp/louca1.png');        
+-fx-background-size: cover;        -fx-background-repeat: no-repeat;" 
+            xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.mycompany.s2501.Cozinha.LoucaController">
 
     <children>
         <Label layoutX="550.0" layoutY="100.0" text="" />
@@ -33,7 +37,7 @@
                         -fx-background-color: #ffffff;">
 
             <tooltip>
-                <Tooltip text="Voltar a cozinha" />
+                <Tooltip text="Voltar" />
             </tooltip>
         </Button>
         

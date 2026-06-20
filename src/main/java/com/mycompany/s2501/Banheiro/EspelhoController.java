@@ -7,7 +7,16 @@ import javafx.fxml.FXML;
 public class EspelhoController {
 
     @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
+    private void abrir() throws IOException {
+        App.setRoot("armarioe");
+    }
+    @FXML
+    private void voltar() throws IOException {
+        App.setRoot("pia");
+    }
+    
+    @FXML
+    private void abrirInventario() {
+        App.toggleInventario();
     }
 }

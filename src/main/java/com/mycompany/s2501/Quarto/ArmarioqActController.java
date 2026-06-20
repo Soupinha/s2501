@@ -12,7 +12,7 @@ public class ArmarioqActController {
     }    
     
     @FXML
-    private void fechararmario() throws IOException {
+    private void fechar() throws IOException {
         App.setRoot("armarioq");
     }
     

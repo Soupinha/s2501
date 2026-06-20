@@ -20,7 +20,7 @@ public class CorredorPrincipalController {
     }
     @FXML
     private void irfora() throws IOException {
-        App.setRoot("fora");
+        App.setRoot("porta");
     }
     
     @FXML

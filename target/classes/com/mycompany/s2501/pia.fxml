@@ -6,7 +6,10 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-image: url('/com/mycompany/s2501/pia2.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.s2501.Banheiro.PiaController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" 
+            style="-fx-background-image: url('/com/mycompany/s2501/jogotlp/pia2.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" 
+            xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.mycompany.s2501.Banheiro.PiaController">
  
     <children>
         <Label text="" />
@@ -55,7 +58,7 @@
         
         <Button fx:id="abrirgaveta" 
                 layoutX="520.0" 
-                layoutY="540.0" 
+                layoutY="550.0" 
                 onAction="#abrirgaveta"
                 prefHeight="15.0" 
                 prefWidth="15.0" 

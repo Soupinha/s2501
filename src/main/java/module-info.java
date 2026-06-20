@@ -3,7 +3,7 @@ module com.mycompany.s2501 {
     requires javafx.fxml;
     
     requires java.sql;
-    requires org.postgresql.jdbc;
+    //requires org.postgresql.jdbc;
 
     opens com.mycompany.s2501 to javafx.fxml;
     opens com.mycompany.s2501.Quarto to javafx.fxml;

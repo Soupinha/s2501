@@ -7,7 +7,17 @@ import javafx.fxml.FXML;
 public class GeladeiraActController {
 
     @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
+    private void fechar() throws IOException {
+        App.setRoot("geladeira");
+    }
+  
+    @FXML
+    private void voltar() throws IOException {
+        App.setRoot("cozinha");
+    }
+    
+    @FXML
+    private void abrirInventario() {
+        App.toggleInventario();
     }
 }

@@ -8,7 +8,7 @@ public class DiarioActController {
 
     @FXML
     private void voltar() throws IOException {
-        App.setRoot("quarto");
+        App.setRoot("criado");
     }
     @FXML
     private void voltarpagina() throws IOException {

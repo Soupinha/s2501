@@ -7,7 +7,16 @@ import javafx.fxml.FXML;
 public class PortaController {
 
     @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
+    private void voltar() throws IOException {
+        App.setRoot("corredorprincipal");
+    }
+    @FXML
+    private void irfora() throws IOException {
+        App.setRoot("fora");
+    }
+    
+    @FXML
+    private void abrirInventario() {
+        App.toggleInventario();
     }
 }

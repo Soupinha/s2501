@@ -7,7 +7,16 @@ import javafx.fxml.FXML;
 public class PracaController {
 
     @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
+    private void irbanco() throws IOException {
+        App.setRoot("banco");
+    }
+    @FXML
+    private void voltar() throws IOException {
+        App.setRoot("fora");
+    }
+    
+    @FXML
+    private void abrirInventario() {
+        App.toggleInventario();
     }
 }
