@@ -13,7 +13,10 @@ import javafx.scene.layout.FlowPane;
 public class InventarioController {
 
     @FXML
-    private FlowPane areaItens;
+    private FlowPane areaItensMaoEsquerda;
+
+    @FXML
+    private FlowPane areaItensMaoDireita;
 
     @FXML
     private void initialize() {
@@ -21,53 +24,52 @@ public class InventarioController {
     }
 
     public void atualizarItens() {
-        if (areaItens == null) {
+        if (areaItensMaoEsquerda == null || areaItensMaoDireita == null) {
             return;
         }
 
-        areaItens.getChildren().clear();
+        areaItensMaoEsquerda.getChildren().clear();
+        areaItensMaoDireita.getChildren().clear();
+
+        int contador = 0;
 
         for (Item item : InventarioJogador.getItens()) {
-            areaItens.getChildren().add(criarVisualItem(item));
+            int quantidade = InventarioJogador.getQuantidade(item.getId());
+
+            for (int i = 0; i < quantidade; i++) {
+                AnchorPane visualItem = criarVisualItem(item);
+
+                if (contador < 6) {
+                    areaItensMaoEsquerda.getChildren().add(visualItem);
+                } else {
+                    areaItensMaoDireita.getChildren().add(visualItem);
+                }
+
+                contador++;
+            }
         }
     }
 
     private AnchorPane criarVisualItem(Item item) {
         AnchorPane box = new AnchorPane();
 
-        box.setPrefWidth(60);
-        box.setPrefHeight(60);
-
-        // Aqui remove aquela borda/fundo preto
+        box.setPrefWidth(50);
+        box.setPrefHeight(50);
         box.setStyle("-fx-background-color: transparent;");
 
         Image imagem = new Image(App.class.getResourceAsStream(item.getImagemInventario()));
 
         ImageView imageView = new ImageView(imagem);
-        imageView.setFitWidth(60);
-        imageView.setFitHeight(60);
+        imageView.setFitWidth(50);
+        imageView.setFitHeight(50);
         imageView.setPreserveRatio(true);
         imageView.setPickOnBounds(true);
 
-        int quantidade = InventarioJogador.getQuantidade(item.getId());
-
-        Label quantidadeLabel = new Label("x" + quantidade);
-        quantidadeLabel.setStyle(
-                "-fx-text-fill: white;" +
-                "-fx-font-size: 12px;" +
-                "-fx-font-weight: bold;"
-        );
-
-        AnchorPane.setRightAnchor(quantidadeLabel, 0.0);
-        AnchorPane.setBottomAnchor(quantidadeLabel, 0.0);
-
         Tooltip.install(box, new Tooltip(
-                item.getNome()
-                + "\nQuantidade: " + quantidade
-                + "\n" + item.getDescricao()
+                item.getNome() + "\n" + item.getDescricao()
         ));
 
-        box.getChildren().addAll(imageView, quantidadeLabel);
+        box.getChildren().add(imageView);
 
         return box;
     }

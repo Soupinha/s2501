@@ -83,53 +83,62 @@
        
             <AnchorPane fx:id="painelInfoRemedio"
                 layoutX="410.0"
-                layoutY="90.0"
+                layoutY="70.0"
                 prefWidth="170.0"
-                prefHeight="210.0"
+                prefHeight="300.0"
                 visible="false"
                 style="-fx-background-color: rgba(0, 0, 0, 0.70);
                        -fx-background-radius: 10px;
                        -fx-padding: 10px;">
 
-            <children>
-                <Label fx:id="nomeRemedioLabel"
-                       layoutX="10.0"
-                       layoutY="10.0"
-                       prefWidth="150.0"
-                       prefHeight="25.0"
-                       text="Nome"
-                       style="-fx-text-fill: white;
-                              -fx-font-size: 15px;
-                              -fx-font-weight: bold;" />
+        <children>
+            <Label fx:id="nomeRemedioLabel"
+                   layoutX="10.0"
+                   layoutY="10.0"
+                   prefWidth="150.0"
+                   prefHeight="25.0"
+                   text="Nome"
+                   style="-fx-text-fill: white;
+                          -fx-font-size: 15px;
+                          -fx-font-weight: bold;" />
 
-                <Label fx:id="descricaoRemedioLabel"
-                       layoutX="10.0"
-                       layoutY="45.0"
-                       prefWidth="150.0"
-                       prefHeight="75.0"
-                       wrapText="true"
-                       text="Descrição"
-                       style="-fx-text-fill: white;
-                              -fx-font-size: 11px;" />
+            <Label fx:id="descricaoRemedioLabel"
+                   layoutX="10.0"
+                   layoutY="45.0"
+                   prefWidth="150.0"
+                   prefHeight="90.0"
+                   wrapText="true"
+                   text="Descrição"
+                   style="-fx-text-fill: white;
+                          -fx-font-size: 11px;" />
 
-                <Label fx:id="quantidadeRemedioLabel"
-                       layoutX="10.0"
-                       layoutY="125.0"
-                       prefWidth="150.0"
-                       prefHeight="25.0"
-                       text="Disponível: 3"
-                       style="-fx-text-fill: white;
-                              -fx-font-size: 12px;" />
+            <Label fx:id="precoRemedioLabel"
+                   layoutX="10.0"
+                   layoutY="145.0"
+                   prefWidth="150.0"
+                   prefHeight="25.0"
+                   text="Preço: 0 moedas"
+                   style="-fx-text-fill: white;
+                          -fx-font-size: 12px;" />
 
-                <Button fx:id="comprarButton"
-                        layoutX="35.0"
-                        layoutY="165.0"
-                        prefWidth="100.0"
-                        prefHeight="28.0"
-                        text="Comprar"
-                        onAction="#comprarSelecionado" />
-            </children>
-        </AnchorPane>
+            <Label fx:id="quantidadeRemedioLabel"
+                   layoutX="10.0"
+                   layoutY="175.0"
+                   prefWidth="150.0"
+                   prefHeight="55.0"
+                   text="Disponível: 3"
+                   style="-fx-text-fill: white;
+                          -fx-font-size: 12px;" />
+
+            <Button fx:id="comprarButton"
+                    layoutX="35.0"
+                    layoutY="245.0"
+                    prefWidth="100.0"
+                    prefHeight="28.0"
+                    text="Comprar"
+                    onAction="#comprarSelecionado" />
+        </children>
+    </AnchorPane>
         
         <AnchorPane fx:id="moedasBox"
             layoutX="465.0"

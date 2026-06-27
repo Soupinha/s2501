@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.MouseEvent;
 
 public class LojaController {
 
@@ -43,6 +44,11 @@ public class LojaController {
     private Button comprarButton;
 
     private Item itemSelecionado;
+    
+    @FXML
+    private Label precoRemedioLabel;
+    
+    private int precoSelecionado;
 
     @FXML
     private void initialize() {
@@ -58,12 +64,12 @@ public class LojaController {
         remedioBox.setCursor(Cursor.HAND);
         Tooltip.install(remedioBox, new Tooltip("Ver " + nome));
 
-        remedioBox.setOnMouseEntered(event -> {
+        remedioBox.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
             remedioBox.setScaleX(1.06);
             remedioBox.setScaleY(1.06);
         });
 
-        remedioBox.setOnMouseExited(event -> {
+        remedioBox.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
             remedioBox.setScaleX(1.0);
             remedioBox.setScaleY(1.0);
         });
@@ -77,7 +83,7 @@ public class LojaController {
                 "Recupera uma pequena parte da energia do jogador.",
                 0,
                 "/com/mycompany/s2501/loja/c1.png"
-        ));
+        ), 0);
     }
 
     @FXML
@@ -88,7 +94,7 @@ public class LojaController {
                 "Ajuda o jogador a resistir melhor aos efeitos da casa.",
                 0,
                 "/com/mycompany/s2501/loja/c2.png"
-        ));
+        ), 0);
     }
 
     @FXML
@@ -99,7 +105,7 @@ public class LojaController {
                 "Aumenta temporariamente a força de ação do jogador.",
                 0,
                 "/com/mycompany/s2501/loja/c3.png"
-        ));
+        ), 0);
     }
 
     @FXML
@@ -110,21 +116,23 @@ public class LojaController {
                 "Ajuda o jogador em momentos de maior perigo.",
                 0,
                 "/com/mycompany/s2501/loja/c4.png"
-        ));
+        ), 0);
     }
 
-    private void mostrarInfo(Item item) {
-        itemSelecionado = item;
+    private void mostrarInfo(Item item, int preco) {
+    itemSelecionado = item;
+    precoSelecionado = preco;
 
-        painelInfoRemedio.setVisible(true);
+    painelInfoRemedio.setVisible(true);
 
-        nomeRemedioLabel.setText(item.getNome());
-        descricaoRemedioLabel.setText(item.getDescricao());
+    nomeRemedioLabel.setText(item.getNome());
+    descricaoRemedioLabel.setText(item.getDescricao());
+    precoRemedioLabel.setText("Preço: " + precoSelecionado + " moedas");
 
-        atualizarQuantidadeDisponivel();
+    atualizarQuantidadeDisponivel();
 
-        comprarButton.setDisable(InventarioJogador.getQuantidadeDisponivel(item.getId()) <= 0);
-    }
+    comprarButton.setDisable(InventarioJogador.getQuantidadeDisponivel(item.getId()) <= 0);
+}
 
     @FXML
     private void comprarSelecionado() {
