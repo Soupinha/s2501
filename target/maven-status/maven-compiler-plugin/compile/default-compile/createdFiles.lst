@@ -24,6 +24,7 @@ com\mycompany\s2501\Banheiro\EspelhoController.class
 module-info.class
 com\mycompany\s2501\Sala\BancadasController.class
 com\mycompany\s2501\Fora\MercadoController.class
+com\mycompany\s2501\Model\InventarioJogador.class
 com\mycompany\s2501\InventarioController.class
 com\mycompany\s2501\Quarto\DiarioActController.class
 com\mycompany\s2501\dao\RunDAO.class
@@ -40,6 +41,7 @@ com\mycompany\s2501\Model\Jogador.class
 com\mycompany\s2501\Quarto\ArmarioqActController.class
 com\mycompany\s2501\Banheiro\PiaController.class
 com\mycompany\s2501\dao\MemoriaDAO.class
+com\mycompany\s2501\Cozinha\LojaController.class
 com\mycompany\s2501\Model\Memoria.class
 com\mycompany\s2501\Banheiro\CestoController.class
 com\mycompany\s2501\Quarto\CriadoController.class

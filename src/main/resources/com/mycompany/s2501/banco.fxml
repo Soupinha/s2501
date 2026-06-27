@@ -37,8 +37,8 @@
         </Button>
         
         <Button fx:id="voltar" 
-                layoutX="400.0" 
-                layoutY="1000.0" 
+                layoutX="600.0" 
+                layoutY="760.0" 
                 onAction="#voltar" 
                 prefHeight="15.0" 
                 prefWidth="15.0" 

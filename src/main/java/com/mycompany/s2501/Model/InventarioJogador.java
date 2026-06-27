@@ -1,0 +1,47 @@
+package com.mycompany.s2501.Model;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class InventarioJogador {
+
+    private static final int LIMITE_POR_ITEM = 3;
+
+    private static final Map<Integer, Item> itens = new LinkedHashMap<>();
+    private static final Map<Integer, Integer> quantidades = new LinkedHashMap<>();
+
+    private InventarioJogador() {
+    }
+
+    public static boolean adicionarItem(Item item) {
+        int id = item.getId();
+        int quantidadeAtual = getQuantidade(id);
+
+        if (quantidadeAtual >= LIMITE_POR_ITEM) {
+            return false;
+        }
+
+        itens.putIfAbsent(id, item);
+        quantidades.put(id, quantidadeAtual + 1);
+
+        return true;
+    }
+
+    public static int getQuantidade(int id) {
+        return quantidades.getOrDefault(id, 0);
+    }
+
+    public static int getQuantidadeDisponivel(int id) {
+        return LIMITE_POR_ITEM - getQuantidade(id);
+    }
+
+    public static int getLimitePorItem() {
+        return LIMITE_POR_ITEM;
+    }
+
+    public static Collection<Item> getItens() {
+        return Collections.unmodifiableCollection(itens.values());
+    }
+}

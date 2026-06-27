@@ -9,6 +9,10 @@ public class CozinhaController {
     private void irgeladeira() throws IOException {
         App.setRoot("geladeira");
     }
+    @FXML
+    private void irdespensa() {
+        App.abrirLoja();
+    }
      @FXML
     private void irbancadac() throws IOException {
         App.setRoot("bancadac");

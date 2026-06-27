@@ -41,6 +41,7 @@
         <Button fx:id="despensa" 
                 layoutX="195.0" 
                 layoutY="320.0" 
+                onAction="#irdespensa"
                 prefHeight="15.0" 
                 prefWidth="15.0" 
                 style="-fx-background-radius: 100em;                    
