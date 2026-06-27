@@ -8,7 +8,7 @@ public class BancoController {
 
     @FXML
     private void sentarbanco() throws IOException {
-        App.setRoot("banco");
+        App.abrirRunPraca();
     }
     @FXML
     private void voltar() throws IOException {

@@ -13,7 +13,7 @@ module com.mycompany.s2501 {
     opens com.mycompany.s2501.Banheiro to javafx.fxml;
     opens com.mycompany.s2501.Cozinha to javafx.fxml;
     opens com.mycompany.s2501.Sala to javafx.fxml;
-    
+    opens com.mycompany.s2501.Runs to javafx.fxml;
     
     exports com.mycompany.s2501;
 }

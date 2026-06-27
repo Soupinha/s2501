@@ -1,4 +1,5 @@
 com\mycompany\s2501\Sala\SofaController.class
+com\mycompany\s2501\Runs\RunPracaController$1.class
 com\mycompany\s2501\CorredorP\CorredorPrincipalController.class
 com\mycompany\s2501\Corredor\QuartoTrancadoController.class
 com\mycompany\s2501\Sala\SalaController.class
@@ -24,6 +25,7 @@ com\mycompany\s2501\Banheiro\EspelhoController.class
 module-info.class
 com\mycompany\s2501\Sala\BancadasController.class
 com\mycompany\s2501\Fora\MercadoController.class
+com\mycompany\s2501\Runs\RunPracaController.class
 com\mycompany\s2501\Model\InventarioJogador.class
 com\mycompany\s2501\InventarioController.class
 com\mycompany\s2501\Quarto\DiarioActController.class

@@ -16,6 +16,7 @@ public class App extends Application {
     private static Stage primaryStage;
     private static Stage inventarioStage;
     private static Stage lojaStage;
+    private static Stage runPracaStage;
 
     private static InventarioController inventarioController;
 
@@ -29,6 +30,36 @@ public class App extends Application {
         stage.setTitle("Jogo");
         stage.setResizable(false);
         stage.show();
+    }
+    
+    public static void abrirRunPraca() {
+        try {
+            if (runPracaStage != null && runPracaStage.isShowing()) {
+                runPracaStage.toFront();
+                return;
+            }
+
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("runPraca.fxml"));
+            Parent root = loader.load();
+
+            runPracaStage = new Stage();
+            runPracaStage.setTitle("Run Praça");
+            runPracaStage.setScene(new Scene(root, 1200, 400));
+            runPracaStage.setResizable(false);
+
+            runPracaStage.initOwner(primaryStage);
+            runPracaStage.initModality(Modality.WINDOW_MODAL);
+
+            runPracaStage.setOnHidden(event -> {
+                runPracaStage = null;
+            });
+
+            runPracaStage.show();
+            runPracaStage.toFront();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void toggleInventario() {
