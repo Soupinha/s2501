@@ -17,6 +17,7 @@ public class App extends Application {
     private static Stage inventarioStage;
     private static Stage lojaStage;
     private static Stage runPracaStage;
+    private static boolean runPracaAbrindo = false;
 
     private static InventarioController inventarioController;
 
@@ -33,34 +34,42 @@ public class App extends Application {
     }
     
     public static void abrirRunPraca() {
-        try {
-            if (runPracaStage != null && runPracaStage.isShowing()) {
-                runPracaStage.toFront();
-                return;
-            }
-
-            FXMLLoader loader = new FXMLLoader(App.class.getResource("runPraca.fxml"));
-            Parent root = loader.load();
-
-            runPracaStage = new Stage();
-            runPracaStage.setTitle("Run Praça");
-            runPracaStage.setScene(new Scene(root, 1200, 400));
-            runPracaStage.setResizable(false);
-
-            runPracaStage.initOwner(primaryStage);
-            runPracaStage.initModality(Modality.WINDOW_MODAL);
-
-            runPracaStage.setOnHidden(event -> {
-                runPracaStage = null;
-            });
-
-            runPracaStage.show();
-            runPracaStage.toFront();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+    try {
+        if (runPracaAbrindo) {
+            return;
         }
+
+        if (runPracaStage != null && runPracaStage.isShowing()) {
+            runPracaStage.toFront();
+            return;
+        }
+
+        runPracaAbrindo = true;
+
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("runPraca.fxml"));
+        Parent root = loader.load();
+
+        runPracaStage = new Stage();
+        runPracaStage.setTitle("Run Praça");
+        runPracaStage.setScene(new Scene(root, 1200, 400));
+        runPracaStage.setResizable(false);
+
+        runPracaStage.initOwner(primaryStage);
+        runPracaStage.initModality(Modality.WINDOW_MODAL);
+
+        runPracaStage.setOnHidden(event -> {
+            runPracaStage = null;
+            runPracaAbrindo = false;
+        });
+
+        runPracaStage.show();
+        runPracaStage.toFront();
+
+    } catch (IOException e) {
+        runPracaAbrindo = false;
+        e.printStackTrace();
     }
+}
 
     public static void toggleInventario() {
         try {

@@ -20,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.application.Platform;
 
 public class RunPracaController {
 
@@ -34,7 +35,15 @@ public class RunPracaController {
 
     @FXML
     private AnchorPane npcLayer;
+     
+    private boolean jogoIniciado = false;
 
+    private final double larguraPlayer = 160;
+    private final double alturaPlayer = 220;
+
+    private final double larguraNpc = 70;
+    private final double alturaNpc = 100;
+    
     @FXML
     private AnchorPane painelInicio;
 
@@ -86,45 +95,65 @@ public class RunPracaController {
     private long ultimoFrameTroca = 0;
 
     @FXML
-    private void initialize() {
-        carregarImagens();
+private void initialize() {
+    carregarImagens();
 
-        background.setImage(bg0);
-        player.setImage(playerSide);
+    background.setImage(bg0);
 
-        posicionarPlayerNoChao();
+    player.setFitWidth(larguraPlayer);
+    player.setFitHeight(alturaPlayer);
+    player.setImage(playerSide);
 
-        root.setFocusTraversable(true);
+    posicionarPlayerNoChao();
 
-        root.setOnKeyPressed(event -> {
-            if (!jogoRodando) {
-                return;
-            }
+    root.setFocusTraversable(true);
 
-            if (event.getCode() == KeyCode.A || event.getCode() == KeyCode.LEFT) {
-                esquerdaPressionada = true;
-            }
+    registrarFechamentoDaJanela();
 
-            if (event.getCode() == KeyCode.D || event.getCode() == KeyCode.RIGHT) {
-                direitaPressionada = true;
-            }
+    root.setOnKeyPressed(event -> {
+        if (!jogoRodando) {
+            return;
+        }
 
-            if (event.getCode() == KeyCode.E) {
-                interagir();
-            }
-        });
+        if (event.getCode() == KeyCode.A || event.getCode() == KeyCode.LEFT) {
+            esquerdaPressionada = true;
+        }
 
-        root.setOnKeyReleased(event -> {
-            if (event.getCode() == KeyCode.A || event.getCode() == KeyCode.LEFT) {
-                esquerdaPressionada = false;
-            }
+        if (event.getCode() == KeyCode.D || event.getCode() == KeyCode.RIGHT) {
+            direitaPressionada = true;
+        }
 
-            if (event.getCode() == KeyCode.D || event.getCode() == KeyCode.RIGHT) {
-                direitaPressionada = false;
-            }
-        });
-    }
+        if (event.getCode() == KeyCode.E) {
+            interagir();
+        }
+    });
 
+    root.setOnKeyReleased(event -> {
+        if (event.getCode() == KeyCode.A || event.getCode() == KeyCode.LEFT) {
+            esquerdaPressionada = false;
+        }
+
+        if (event.getCode() == KeyCode.D || event.getCode() == KeyCode.RIGHT) {
+            direitaPressionada = false;
+        }
+    });
+}
+    
+    private void registrarFechamentoDaJanela() {
+    root.sceneProperty().addListener((obsScene, oldScene, newScene) -> {
+        if (newScene != null) {
+            newScene.windowProperty().addListener((obsWindow, oldWindow, newWindow) -> {
+                if (newWindow instanceof Stage) {
+                    Stage stage = (Stage) newWindow;
+
+                    stage.setOnCloseRequest(event -> {
+                        pararTudo();
+                    });
+                }
+            });
+        }
+    });
+}
     private void carregarImagens() {
         bg0 = new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runp/bg_stage0.png"));
         bg1 = new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runp/bg_stage1.png"));
@@ -147,13 +176,19 @@ public class RunPracaController {
 
     @FXML
     private void iniciarJogo() {
+        if (jogoIniciado || jogoRodando) {
+            return;
+        }
+
+        jogoIniciado = true;
+
         painelInicio.setVisible(false);
         jogoRodando = true;
         interagiuComNpc = false;
         venceu = false;
         tempoRestante = 90;
 
-        root.requestFocus();
+        Platform.runLater(() -> root.requestFocus());
 
         iniciarTempo();
         iniciarSpawnNpc();
@@ -225,87 +260,89 @@ public class RunPracaController {
         gameLoop.start();
     }
 
-    private void moverPlayer() {
-        double x = player.getLayoutX();
-        boolean estaAndando = false;
+private void moverPlayer() {
+    double x = player.getLayoutX();
+    boolean estaAndando = false;
 
-        if (esquerdaPressionada) {
-            x -= velocidadePlayer;
-            player.setScaleX(-1);
-            estaAndando = true;
-        }
+    if (esquerdaPressionada) {
+        x -= velocidadePlayer;
 
-        if (direitaPressionada) {
-            x += velocidadePlayer;
-            player.setScaleX(1);
-            estaAndando = true;
-        }
+        // A imagem side.png já olha para a esquerda
+        player.setScaleX(1);
 
-        if (x < 0) {
-            x = 0;
-        }
-
-        if (x > larguraTela - player.getFitWidth()) {
-            x = larguraTela - player.getFitWidth();
-        }
-
-        player.setLayoutX(x);
-        posicionarPlayerNoChao();
-
-        if (estaAndando) {
-            animarCaminhada();
-        } else {
-            player.setImage(playerSide);
-            walkFrameAtual = 0;
-        }
+        estaAndando = true;
     }
 
-    private void criarNpc() {
-       ImageView npc = new ImageView(playerSide);
+    if (direitaPressionada) {
+        x += velocidadePlayer;
 
-        npc.setFitWidth(70);
-        npc.setFitHeight(100);
-        npc.setPreserveRatio(true);
+        // Para andar para a direita, precisa espelhar
+        player.setScaleX(-1);
 
-        boolean vemDaEsquerda = random.nextBoolean();
-
-        if (vemDaEsquerda) {
-            npc.setLayoutX(-80);
-            npc.setScaleX(1);
-            npc.setUserData("direita");
-        } else {
-            npc.setLayoutX(larguraTela + 80);
-            npc.setScaleX(-1);
-            npc.setUserData("esquerda");
-        }
-
-        npc.setLayoutY(chaoY - npc.getFitHeight());
-
-        npcs.add(npc);
-        npcLayer.getChildren().add(npc);
+        estaAndando = true;
     }
 
-    private void moverNpcs() {
-        Iterator<ImageView> iterator = npcs.iterator();
-
-        while (iterator.hasNext()) {
-            ImageView npc = iterator.next();
-
-            String direcao = (String) npc.getUserData();
-
-            if ("direita".equals(direcao)) {
-                npc.setLayoutX(npc.getLayoutX() + velocidadeNpc);
-            } else {
-                npc.setLayoutX(npc.getLayoutX() - velocidadeNpc);
-            }
-
-            if (npc.getLayoutX() < -120 || npc.getLayoutX() > larguraTela + 120) {
-                npcLayer.getChildren().remove(npc);
-                iterator.remove();
-            }
-        }
+    if (x < 0) {
+        x = 0;
     }
 
+    if (x > larguraTela - player.getFitWidth()) {
+        x = larguraTela - player.getFitWidth();
+    }
+
+    player.setLayoutX(x);
+    posicionarPlayerNoChao();
+
+    if (estaAndando) {
+        animarCaminhada();
+    } else {
+        player.setImage(playerSide);
+        walkFrameAtual = 0;
+    }
+}
+ private void criarNpc() {
+    ImageView npc = new ImageView(playerSide);
+
+    npc.setFitWidth(larguraNpc);
+    npc.setFitHeight(alturaNpc);
+    npc.setPreserveRatio(true);
+
+    boolean vemDaEsquerda = random.nextBoolean();
+
+    if (vemDaEsquerda) {
+        npc.setLayoutX(-80);
+
+        // NPC vai para a direita, então precisa espelhar
+        npc.setScaleX(-1);
+
+        npc.setUserData("direita");
+    } else {
+        npc.setLayoutX(larguraTela + 80);
+
+        // NPC vai para a esquerda, imagem original já olha para a esquerda
+        npc.setScaleX(1);
+
+        npc.setUserData("esquerda");
+    }
+
+    npc.setLayoutY(chaoY - npc.getFitHeight());
+
+    npcs.add(npc);
+    npcLayer.getChildren().add(npc);
+}
+private void mandarNpcEmbora(ImageView npc) {
+    if (npc.getLayoutX() < player.getLayoutX()) {
+        npc.setUserData("esquerda");
+
+        // Indo embora para a esquerda
+        npc.setScaleX(1);
+    } else {
+        npc.setUserData("direita");
+
+        // Indo embora para a direita
+        npc.setScaleX(-1);
+    }
+}
     private void interagir() {
         ImageView npcProximo = encontrarNpcProximo();
 
@@ -332,15 +369,19 @@ public class RunPracaController {
         return null;
     }
 
-    private void mandarNpcEmbora(ImageView npc) {
-        if (npc.getLayoutX() < player.getLayoutX()) {
-            npc.setUserData("esquerda");
-            npc.setScaleX(-1);
-        } else {
-            npc.setUserData("direita");
-            npc.setScaleX(1);
-        }
+   private void mandarNpcEmbora(ImageView npc) {
+    if (npc.getLayoutX() < player.getLayoutX()) {
+        npc.setUserData("esquerda");
+
+        // Indo embora para a esquerda
+        npc.setScaleX(1);
+    } else {
+        npc.setUserData("direita");
+
+        // Indo embora para a direita
+        npc.setScaleX(-1);
     }
+}
 
     private boolean estaPertoDoBanco() {
         double centroPlayer = player.getLayoutX() + player.getFitWidth() / 2;
@@ -365,6 +406,9 @@ public class RunPracaController {
         npcs.clear();
 
         player.setImage(playerSit);
+        player.setScaleX(1);
+        player.setFitWidth(larguraPlayer);
+        player.setFitHeight(alturaPlayer);
         player.setLayoutX(390);
         posicionarPlayerNoChao();
 
@@ -389,19 +433,29 @@ public class RunPracaController {
         fecharDepoisDeAlgunsSegundos();
     }
 
-    private void pararTudo() {
-        if (gameLoop != null) {
-            gameLoop.stop();
-        }
+private void pararTudo() {
+    jogoRodando = false;
 
-        if (tempoTimeline != null) {
-            tempoTimeline.stop();
-        }
+    esquerdaPressionada = false;
+    direitaPressionada = false;
 
-        if (spawnTimeline != null) {
-            spawnTimeline.stop();
-        }
+    if (gameLoop != null) {
+        gameLoop.stop();
+        gameLoop = null;
     }
+
+    if (tempoTimeline != null) {
+        tempoTimeline.stop();
+        tempoTimeline = null;
+    }
+
+    if (spawnTimeline != null) {
+        spawnTimeline.stop();
+        spawnTimeline = null;
+    }
+}
+
+
     
     private void animarCaminhada() {
         long agora = System.nanoTime();

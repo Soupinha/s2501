@@ -21,11 +21,11 @@
                    preserveRatio="false" />
 
         <ImageView fx:id="player"
-                   fitWidth="80.0"
-                   fitHeight="110.0"
-                   preserveRatio="true"
-                   layoutX="520.0"
-                   layoutY="285.0" />
+           fitWidth="160.0"
+           fitHeight="220.0"
+           preserveRatio="true"
+           layoutX="520.0"
+           layoutY="170.0" />
 
         <AnchorPane fx:id="npcLayer"
                     prefWidth="1200.0"
