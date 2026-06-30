@@ -11,8 +11,6 @@ import javafx.util.Duration;
 
 //tudo okay
 public class QuartoController {
-    @FXML
-private Label floatingText;
     
     @FXML
     private void ircorredor() throws IOException {
@@ -29,13 +27,17 @@ private Label floatingText;
         App.setRoot("armarioq");
     }
     
-     @FXML
+    @FXML
     private Button botaoContinuar;
+     
+    @FXML
+    private Label floatingText;
 
     // Frases
     private String[] falas = {
-        "Eu conheço esse lugar?",
-        "O que aconteceu aqui?"
+        "... Onde estou?",
+        "Eu conheço esse lugar?"
+       
     };
 
     private int indice = 0;

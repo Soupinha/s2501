@@ -6,7 +6,6 @@ package com.mycompany.s2501.Runs;
 
 import com.mycompany.s2501.App;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import javafx.animation.AnimationTimer;
@@ -369,19 +368,19 @@ private void mandarNpcEmbora(ImageView npc) {
         return null;
     }
 
-   private void mandarNpcEmbora(ImageView npc) {
-    if (npc.getLayoutX() < player.getLayoutX()) {
-        npc.setUserData("esquerda");
+    private void mandarNpcEmbora (ImageView npc) {
+        if (npc.getLayoutX() < player.getLayoutX()) {
+            npc.setUserData("esquerda");
 
-        // Indo embora para a esquerda
-        npc.setScaleX(1);
-    } else {
-        npc.setUserData("direita");
+            // Indo embora para a esquerda
+            npc.setScaleX(1);
+        } else {
+            npc.setUserData("direita");
 
-        // Indo embora para a direita
-        npc.setScaleX(-1);
+            // Indo embora para a direita
+            npc.setScaleX(-1);
+        }
     }
-}
 
     private boolean estaPertoDoBanco() {
         double centroPlayer = player.getLayoutX() + player.getFitWidth() / 2;

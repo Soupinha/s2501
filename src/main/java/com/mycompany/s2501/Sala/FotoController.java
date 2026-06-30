@@ -10,4 +10,6 @@ public class FotoController {
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
     }
+    
+    
 }
