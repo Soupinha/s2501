@@ -29,6 +29,7 @@ public class App extends Application {
     private static final Set<String> dialogosJaIniciados = new HashSet<>();
     private static final Map<String, Integer> indicesDialogo = new HashMap<>();
     private static final Map<String, Timeline> timelinesDialogo = new HashMap<>();    
+    private static boolean dialogoPerdaRunPracaPendente = false;
 
     private static InventarioController inventarioController;
 
@@ -254,6 +255,50 @@ public class App extends Application {
         indicesDialogo.clear();
         dialogosJaIniciados.clear();
     }    
+    
+    
+    public static void voltarParaQuartoAposPerdaRunPraca() {
+        dialogoPerdaRunPracaPendente = true;
+
+        try {
+            setRoot("quarto");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean consumirDialogoPerdaRunPraca() {
+        if (dialogoPerdaRunPracaPendente) {
+            dialogoPerdaRunPracaPendente = false;
+            return true;
+        }
+
+        return false;
+    }
+    
+    public static void iniciarDialogoSituacional(String idDialogo, Label floatingText, Button botaoContinuar, String[] falas) {
+        if (floatingText == null || botaoContinuar == null) {
+            return;
+        }
+
+        if (falas == null || falas.length == 0) {
+            esconderDialogo(floatingText, botaoContinuar);
+            return;
+        }
+
+        Timeline timelineAnterior = timelinesDialogo.remove(idDialogo);
+
+        if (timelineAnterior != null) {
+            timelineAnterior.stop();
+        }
+
+        indicesDialogo.put(idDialogo, 0);
+
+        floatingText.setVisible(true);
+        botaoContinuar.setVisible(false);
+
+        mostrarTextoLento(idDialogo, floatingText, botaoContinuar, falas[0]);
+    }
 
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));

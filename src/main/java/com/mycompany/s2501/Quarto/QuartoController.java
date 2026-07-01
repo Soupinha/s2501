@@ -30,26 +30,40 @@ public class QuartoController {
     @FXML
     private Label floatingText;
 
-    private final String dialogoId = "quarto_inicio";
+    private String dialogoIdAtivo;
+    private String[] falasAtivas;
 
-    private String[] falas = {
+    private final String[] falasQuartoInicio = {
         "... Onde estou?",
         "Eu conheço esse lugar?"
     };
 
+    private final String[] falasPerdaRunPraca = {
+        "... De novo aqui."
+    };
+
     @FXML
     public void initialize() {
-        App.iniciarDialogoUmaVez(dialogoId, floatingText, botaoContinuar, falas);
+        if (App.consumirDialogoPerdaRunPraca()) {
+            dialogoIdAtivo = "quarto_perda_run_praca";
+            falasAtivas = falasPerdaRunPraca;
+
+            App.iniciarDialogoSituacional(dialogoIdAtivo, floatingText, botaoContinuar, falasAtivas);
+        } else {
+            dialogoIdAtivo = "quarto_inicio";
+            falasAtivas = falasQuartoInicio;
+
+            App.iniciarDialogoUmaVez(dialogoIdAtivo, floatingText, botaoContinuar, falasAtivas);
+        }
     }
 
     @FXML
     public void proximaFrase() {
-        App.proximaFraseDialogo(dialogoId, floatingText, botaoContinuar, falas);
+        App.proximaFraseDialogo(dialogoIdAtivo, floatingText, botaoContinuar, falasAtivas);
     }
     
-    @FXML
+        @FXML
     private void abrirInventario() {
         App.toggleInventario();
     }
-    
 }

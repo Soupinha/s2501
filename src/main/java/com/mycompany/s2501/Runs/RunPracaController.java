@@ -114,7 +114,8 @@ private void initialize() {
 
     player.setFitWidth(larguraPlayer);
     player.setFitHeight(alturaPlayer);
-    player.setImage(playerSide);
+    player.setImage(playerFront);
+    player.setScaleX(1);
 
     posicionarPlayerNoChao();
 
@@ -152,19 +153,22 @@ private void initialize() {
 }
     
     private void registrarFechamentoDaJanela() {
-    root.sceneProperty().addListener((obsScene, oldScene, newScene) -> {
-        if (newScene != null) {
-            newScene.windowProperty().addListener((obsWindow, oldWindow, newWindow) -> {
-                if (newWindow instanceof Stage) {
-                    Stage stage = (Stage) newWindow;
+        root.sceneProperty().addListener((obsScene, oldScene, newScene) -> {
+            if (newScene != null) {
+                newScene.windowProperty().addListener((obsWindow, oldWindow, newWindow) -> {
+                    if (newWindow instanceof Stage) {
+                        Stage stage = (Stage) newWindow;
 
-                    stage.setOnCloseRequest(event -> {
-                        pararTudo();
+                        stage.setOnCloseRequest(event -> {
+                            if (!podeFecharJanela) {
+                                event.consume();
+                        }
                     });
                 }
             });
         }
     });
+
 }
     private void carregarImagens() {
         bg0 = new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runp/bg_stage0.png"));
@@ -199,6 +203,12 @@ private void initialize() {
         interagiuComNpc = false;
         venceu = false;
         tempoRestante = 90;
+        
+        jaSeMoveu = false;
+        ultimoMovimentoNano = System.nanoTime();
+
+        player.setImage(playerFront);
+        player.setScaleX(1);
 
         Platform.runLater(() -> root.requestFocus());
 
@@ -264,7 +274,7 @@ private void initialize() {
         gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                moverPlayer();
+                moverPlayer(now);
                 moverNpcs();
             }
         };
@@ -272,46 +282,54 @@ private void initialize() {
         gameLoop.start();
     }
 
-private void moverPlayer() {
-    double x = player.getLayoutX();
-    boolean estaAndando = false;
+    private void moverPlayer(long now) {
+        double x = player.getLayoutX();
+        boolean estaAndando = false;
 
-    if (esquerdaPressionada) {
-        x -= velocidadePlayer;
+        if (esquerdaPressionada) {
+            x -= velocidadePlayer;
 
-        // A imagem side.png já olha para a esquerda
-        player.setScaleX(1);
+            // A imagem side/walk olha para a esquerda.
+            player.setScaleX(1);
 
-        estaAndando = true;
+            estaAndando = true;
+        }
+
+        if (direitaPressionada) {
+            x += velocidadePlayer;
+
+            // Para andar para a direita, espelha.
+            player.setScaleX(-1);
+
+            estaAndando = true;
+        }
+
+        if (x < 0) {
+            x = 0;
+        }
+
+        if (x > larguraTela - player.getFitWidth()) {
+            x = larguraTela - player.getFitWidth();
+        }
+
+        player.setLayoutX(x);
+        posicionarPlayerNoChao();
+
+        if (estaAndando) {
+            jaSeMoveu = true;
+            ultimoMovimentoNano = now;
+            animarCaminhada();
+        } else {
+            if (!jaSeMoveu || now - ultimoMovimentoNano >= tempoParadoParaFrontNano) {
+                player.setImage(playerFront);
+                player.setScaleX(1);
+            } else {
+                player.setImage(playerSide);
+            }
+
+            walkFrameAtual = 0;
+        }
     }
-
-    if (direitaPressionada) {
-        x += velocidadePlayer;
-
-        // Para andar para a direita, precisa espelhar
-        player.setScaleX(-1);
-
-        estaAndando = true;
-    }
-
-    if (x < 0) {
-        x = 0;
-    }
-
-    if (x > larguraTela - player.getFitWidth()) {
-        x = larguraTela - player.getFitWidth();
-    }
-
-    player.setLayoutX(x);
-    posicionarPlayerNoChao();
-
-    if (estaAndando) {
-        animarCaminhada();
-    } else {
-        player.setImage(playerSide);
-        walkFrameAtual = 0;
-    }
-}
     private void criarNpc() {
         ImageView npc = new ImageView(playerSide);
 
@@ -454,10 +472,40 @@ private void moverPlayer() {
 
         pararTudo();
 
-        painelFinal.setVisible(true);
-        mensagemFinalLabel.setText("A praça escureceu. O descanso não veio.");
+        npcLayer.getChildren().clear();
+        npcs.clear();
 
-        fecharDepoisDeAlgunsSegundos();
+        tempoLabel.setVisible(false);
+
+        painelFinal.setVisible(true);
+        painelFinal.setOpacity(0);
+        painelFinal.setStyle("-fx-background-color: black;");
+
+        mensagemFinalLabel.setText("A praça escureceu. O descanso não veio.");
+        mensagemFinalLabel.setOpacity(0);
+
+        FadeTransition fadeTelaPreta = new FadeTransition(Duration.seconds(2.5), painelFinal);
+        fadeTelaPreta.setFromValue(0);
+        fadeTelaPreta.setToValue(1);
+
+        FadeTransition fadeMensagem = new FadeTransition(Duration.seconds(2), mensagemFinalLabel);
+        fadeMensagem.setFromValue(0);
+        fadeMensagem.setToValue(1);
+
+        PauseTransition pausaDepoisMensagem = new PauseTransition(Duration.seconds(2));
+
+        SequentialTransition transicaoPerda = new SequentialTransition(
+                fadeTelaPreta,
+                fadeMensagem,
+                pausaDepoisMensagem
+        );
+
+        transicaoPerda.setOnFinished(event -> {
+            App.voltarParaQuartoAposPerdaRunPraca();
+            fecharStageDaRun();
+        });
+
+        transicaoPerda.play();
     }
 
 private void pararTudo() {
@@ -501,11 +549,20 @@ private void pararTudo() {
 
     private void fecharDepoisDeAlgunsSegundos() {
         Timeline fechar = new Timeline(new KeyFrame(Duration.seconds(4), event -> {
-            Stage stage = (Stage) root.getScene().getWindow();
-            stage.close();
+            fecharStageDaRun();
         }));
 
         fechar.setCycleCount(1);
         fechar.play();
     }
+    
+    private void fecharStageDaRun() {
+        podeFecharJanela = true;
+
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.close();
+    }
+    
+    
+    
 }
