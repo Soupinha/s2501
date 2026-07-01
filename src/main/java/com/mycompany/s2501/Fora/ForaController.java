@@ -13,7 +13,7 @@ public class ForaController {
 
     @FXML
     private void irpraca() throws IOException {
-        App.setRoot("praca");
+        App.setRoot("caminho");
     }
     @FXML
     private void irrua1() throws IOException {
@@ -39,70 +39,20 @@ public class ForaController {
     @FXML
     private Label floatingText;
 
-    // Frases
-    private String[] falas = {
-        "Que frio..."
-       
-    };
+    private final String dialogoId = "fora_inicio";
 
-    private int indice = 0;
+    private String[] falas = {
+        "Está frio..."
+    };
 
     @FXML
     public void initialize() {
-
-        mostrarTextoLento(falas[indice]);
-    }
-
-    public void mostrarTextoLento(String texto) {
-
-        floatingText.setText("");
-
-        // Esconde botão enquanto escreve
-        botaoContinuar.setVisible(false);
-
-        Timeline timeline = new Timeline();
-
-        for (int i = 0; i < texto.length(); i++) {
-
-            final int index = i;
-
-            KeyFrame keyFrame = new KeyFrame(
-                Duration.millis(40 * i),
-
-                e -> {
-                    floatingText.setText(
-                        texto.substring(0, index + 1)
-                    );
-                }
-            );
-
-            timeline.getKeyFrames().add(keyFrame);
-        }
-
-        // Quando terminar
-        timeline.setOnFinished(e -> {
-
-            botaoContinuar.setVisible(true);
-        });
-
-        timeline.play();
+        App.iniciarDialogoUmaVez(dialogoId, floatingText, botaoContinuar, falas);
     }
 
     @FXML
     public void proximaFrase() {
-
-        indice++;
-
-        if (indice < falas.length) {
-
-            mostrarTextoLento(falas[indice]);
-
-        } else {
-
-            // Acabaram as frases
-            floatingText.setVisible(false);
-            botaoContinuar.setVisible(false);
-        }
-    } 
+        App.proximaFraseDialogo(dialogoId, floatingText, botaoContinuar, falas);
+    }
     
 }

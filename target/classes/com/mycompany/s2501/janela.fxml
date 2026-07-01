@@ -37,10 +37,34 @@
             <tooltip>
                 <Tooltip text="Voltar" />
             </tooltip>
+        </Button>    
+        <Label fx:id="floatingText"
+                layoutX="350"
+                layoutY="680"
+                text=""
+                prefWidth="500"
+                wrapText="true"
+                alignment="CENTER"
+                style="-fx-text-fill: white;
+                       -fx-font-size: 28;
+                       -fx-background-color: rgba(0,0,0,0.2);" />
+        
+        <Button fx:id="botaoContinuar"
+                text="Continuar"
+                layoutX="540"
+                layoutY="720"
+                onAction="#proximaFrase"
+                style="-fx-background-color: transparent;
+                       -fx-text-fill: #d7d2c8;
+                       -fx-border-color: #6e6558;
+                       -fx-border-width: 0 0 1.5 0;
+                       -fx-font-family: 'Times New Roman';
+                       -fx-font-size: 20px;
+                       -fx-cursor: hand;" 
+        />            
             
             
-            
-        </Button>
+        
     </children>
         
 </AnchorPane>

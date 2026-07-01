@@ -20,6 +20,11 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.application.Platform;
+import java.util.Iterator;
+import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
+
 
 public class RunPracaController {
 
@@ -38,10 +43,12 @@ public class RunPracaController {
     private boolean jogoIniciado = false;
 
     private final double larguraPlayer = 160;
-    private final double alturaPlayer = 220;
+    private final double alturaPlayer = 230;
 
-    private final double larguraNpc = 70;
-    private final double alturaNpc = 100;
+    private final double larguraNpc = larguraPlayer;
+    private final double alturaNpc = alturaPlayer;
+
+    private final double distanciaInteracaoNpc = 140;
     
     @FXML
     private AnchorPane painelInicio;
@@ -61,6 +68,12 @@ public class RunPracaController {
     private AnimationTimer gameLoop;
     private Timeline tempoTimeline;
     private Timeline spawnTimeline;
+    
+    private boolean podeFecharJanela = false;
+
+    private boolean jaSeMoveu = false;
+    private long ultimoMovimentoNano = 0;
+    private final long tempoParadoParaFrontNano = 10_000_000_000L;
 
     private boolean esquerdaPressionada;
     private boolean direitaPressionada;
@@ -76,7 +89,7 @@ public class RunPracaController {
     private final double velocidadePlayer = 4;
     private final double velocidadeNpc = 2;
 
-    private final double chaoY = 390;
+    private final double chaoY = 397;
 
     private final double bancoXInicio = 260;
     private final double bancoXFim = 560;
@@ -299,49 +312,61 @@ private void moverPlayer() {
         walkFrameAtual = 0;
     }
 }
- private void criarNpc() {
-    ImageView npc = new ImageView(playerSide);
+    private void criarNpc() {
+        ImageView npc = new ImageView(playerSide);
 
-    npc.setFitWidth(larguraNpc);
-    npc.setFitHeight(alturaNpc);
-    npc.setPreserveRatio(true);
+        npc.setFitWidth(larguraNpc);
+        npc.setFitHeight(alturaNpc);
+        npc.setPreserveRatio(true);
 
-    boolean vemDaEsquerda = random.nextBoolean();
+        boolean vemDaEsquerda = random.nextBoolean();
 
-    if (vemDaEsquerda) {
-        npc.setLayoutX(-80);
+        if (vemDaEsquerda) {
+            npc.setLayoutX(-larguraNpc);
 
-        // NPC vai para a direita, então precisa espelhar
-        npc.setScaleX(-1);
+            // Como a imagem side.png olha para a esquerda,
+            // para andar para a direita precisa espelhar.
+            npc.setScaleX(-1);
 
-        npc.setUserData("direita");
-    } else {
-        npc.setLayoutX(larguraTela + 80);
+            npc.setUserData("direita");
+        } else {
+            npc.setLayoutX(larguraTela + larguraNpc);
 
-        // NPC vai para a esquerda, imagem original já olha para a esquerda
-        npc.setScaleX(1);
+            // Indo para a esquerda, usa a imagem normal.
+            npc.setScaleX(1);
 
-        npc.setUserData("esquerda");
+            npc.setUserData("esquerda");
+        }
+
+        npc.setLayoutY(chaoY - npc.getFitHeight());
+
+        npcs.add(npc);
+        npcLayer.getChildren().add(npc);
+    }
+    
+    
+    private void moverNpcs() {
+        Iterator<ImageView> iterator = npcs.iterator();
+
+        while (iterator.hasNext()) {
+            ImageView npc = iterator.next();
+
+            String direcao = (String) npc.getUserData();
+
+            if ("direita".equals(direcao)) {
+                npc.setLayoutX(npc.getLayoutX() + velocidadeNpc);
+            } else {
+                npc.setLayoutX(npc.getLayoutX() - velocidadeNpc);
+            }
+
+            if (npc.getLayoutX() < -larguraNpc - 40 || npc.getLayoutX() > larguraTela + larguraNpc + 40) {
+                npcLayer.getChildren().remove(npc);
+                iterator.remove();
+            }
+        }
     }
 
-    npc.setLayoutY(chaoY - npc.getFitHeight());
-
-    npcs.add(npc);
-    npcLayer.getChildren().add(npc);
-}
-private void mandarNpcEmbora(ImageView npc) {
-    if (npc.getLayoutX() < player.getLayoutX()) {
-        npc.setUserData("esquerda");
-
-        // Indo embora para a esquerda
-        npc.setScaleX(1);
-    } else {
-        npc.setUserData("direita");
-
-        // Indo embora para a direita
-        npc.setScaleX(-1);
-    }
-}
+    
     private void interagir() {
         ImageView npcProximo = encontrarNpcProximo();
 
@@ -357,10 +382,13 @@ private void mandarNpcEmbora(ImageView npc) {
     }
 
     private ImageView encontrarNpcProximo() {
-        for (ImageView npc : npcs) {
-            double distancia = Math.abs(player.getLayoutX() - npc.getLayoutX());
+        double centroPlayer = player.getLayoutX() + player.getFitWidth() / 2;
 
-            if (distancia < 80) {
+        for (ImageView npc : npcs) {
+            double centroNpc = npc.getLayoutX() + npc.getFitWidth() / 2;
+            double distancia = Math.abs(centroPlayer - centroNpc);
+
+            if (distancia < distanciaInteracaoNpc) {
                 return npc;
             }
         }
@@ -368,16 +396,16 @@ private void mandarNpcEmbora(ImageView npc) {
         return null;
     }
 
-    private void mandarNpcEmbora (ImageView npc) {
+    private void mandarNpcEmbora(ImageView npc) {
         if (npc.getLayoutX() < player.getLayoutX()) {
             npc.setUserData("esquerda");
 
-            // Indo embora para a esquerda
+            // Indo embora para a esquerda.
             npc.setScaleX(1);
         } else {
             npc.setUserData("direita");
 
-            // Indo embora para a direita
+            // Indo embora para a direita.
             npc.setScaleX(-1);
         }
     }

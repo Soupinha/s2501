@@ -8,6 +8,7 @@ public class MenuController {
 
     @FXML
     private void comecar() throws IOException {
+        App.resetarDialogosDaPartida();
         App.setRoot("quarto");
     }
 }

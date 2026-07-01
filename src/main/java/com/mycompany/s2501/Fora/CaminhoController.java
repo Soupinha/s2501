@@ -4,15 +4,15 @@ import com.mycompany.s2501.App;
 import java.io.IOException;
 import javafx.fxml.FXML;
 
-public class PracaController {
+public class CaminhoController {
 
     @FXML
-    private void irbanco() throws IOException {
-        App.setRoot("banco");
+    private void irpraca() throws IOException {
+        App.setRoot("praca");
     }
     @FXML
     private void voltar() throws IOException {
-        App.setRoot("caminho");
+        App.setRoot("fora");
     }
     
     @FXML

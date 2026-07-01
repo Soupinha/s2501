@@ -6,7 +6,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.util.Duration;
 import java.io.IOException;
 
 public class App extends Application {
@@ -18,6 +26,9 @@ public class App extends Application {
     private static Stage lojaStage;
     private static Stage runPracaStage;
     private static boolean runPracaAbrindo = false;
+    private static final Set<String> dialogosJaIniciados = new HashSet<>();
+    private static final Map<String, Integer> indicesDialogo = new HashMap<>();
+    private static final Map<String, Timeline> timelinesDialogo = new HashMap<>();    
 
     private static InventarioController inventarioController;
 
@@ -138,6 +149,111 @@ public class App extends Application {
             e.printStackTrace();
         }
     }
+    
+    
+    public static void iniciarDialogoUmaVez(String idDialogo, Label floatingText, Button botaoContinuar, String[] falas) {
+        if (floatingText == null || botaoContinuar == null) {
+            return;
+        }
+
+        if (falas == null || falas.length == 0) {
+            esconderDialogo(floatingText, botaoContinuar);
+            return;
+        }
+
+        if (dialogosJaIniciados.contains(idDialogo)) {
+            esconderDialogo(floatingText, botaoContinuar);
+            return;
+        }
+
+        dialogosJaIniciados.add(idDialogo);
+        indicesDialogo.put(idDialogo, 0);
+
+        floatingText.setVisible(true);
+        botaoContinuar.setVisible(false);
+
+        mostrarTextoLento(idDialogo, floatingText, botaoContinuar, falas[0]);
+    }
+
+    public static void proximaFraseDialogo(String idDialogo, Label floatingText, Button botaoContinuar, String[] falas) {
+        if (floatingText == null || botaoContinuar == null) {
+            return;
+        }
+
+        if (!indicesDialogo.containsKey(idDialogo)) {
+            esconderDialogo(floatingText, botaoContinuar);
+            return;
+        }
+
+        int proximoIndice = indicesDialogo.get(idDialogo) + 1;
+
+        if (proximoIndice < falas.length) {
+            indicesDialogo.put(idDialogo, proximoIndice);
+            mostrarTextoLento(idDialogo, floatingText, botaoContinuar, falas[proximoIndice]);
+        } else {
+            finalizarDialogo(idDialogo, floatingText, botaoContinuar);
+        }
+    }
+
+    private static void mostrarTextoLento(String idDialogo, Label floatingText, Button botaoContinuar, String texto) {
+        Timeline timelineAnterior = timelinesDialogo.remove(idDialogo);
+
+        if (timelineAnterior != null) {
+            timelineAnterior.stop();
+        }
+
+        floatingText.setText("");
+        floatingText.setVisible(true);
+        botaoContinuar.setVisible(false);
+
+        Timeline timeline = new Timeline();
+
+        for (int i = 0; i < texto.length(); i++) {
+            final int index = i;
+
+            KeyFrame keyFrame = new KeyFrame(
+                    Duration.millis(60 * i),
+                    event -> floatingText.setText(texto.substring(0, index + 1))
+            );
+
+            timeline.getKeyFrames().add(keyFrame);
+        }
+
+        timeline.setOnFinished(event -> {
+            botaoContinuar.setVisible(true);
+            timelinesDialogo.remove(idDialogo);
+        });
+
+        timelinesDialogo.put(idDialogo, timeline);
+        timeline.play();
+    }
+
+    private static void finalizarDialogo(String idDialogo, Label floatingText, Button botaoContinuar) {
+        Timeline timeline = timelinesDialogo.remove(idDialogo);
+
+        if (timeline != null) {
+            timeline.stop();
+        }
+
+        indicesDialogo.remove(idDialogo);
+        esconderDialogo(floatingText, botaoContinuar);
+    }
+
+    private static void esconderDialogo(Label floatingText, Button botaoContinuar) {
+        floatingText.setText("");
+        floatingText.setVisible(false);
+        botaoContinuar.setVisible(false);
+    }
+
+    public static void resetarDialogosDaPartida() {
+        for (Timeline timeline : timelinesDialogo.values()) {
+            timeline.stop();
+        }
+
+        timelinesDialogo.clear();
+        indicesDialogo.clear();
+        dialogosJaIniciados.clear();
+    }    
 
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));

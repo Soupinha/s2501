@@ -32,68 +32,22 @@ public class BancoController {
     private Label floatingText;
 
     // Frases
+    
+
+    private final String dialogoId = "banco_inicio";
+
     private String[] falas = {
         "Isso é familiar..."
     };
 
-    private int indice = 0;
-
     @FXML
     public void initialize() {
-
-        mostrarTextoLento(falas[indice]);
-    }
-
-    public void mostrarTextoLento(String texto) {
-
-        floatingText.setText("");
-
-        // Esconde botão enquanto escreve
-        botaoContinuar.setVisible(false);
-
-        Timeline timeline = new Timeline();
-
-        for (int i = 0; i < texto.length(); i++) {
-
-            final int index = i;
-
-            KeyFrame keyFrame = new KeyFrame(
-                Duration.millis(40 * i),
-
-                e -> {
-                    floatingText.setText(
-                        texto.substring(0, index + 1)
-                    );
-                }
-            );
-
-            timeline.getKeyFrames().add(keyFrame);
-        }
-
-        // Quando terminar
-        timeline.setOnFinished(e -> {
-
-            botaoContinuar.setVisible(true);
-        });
-
-        timeline.play();
+        App.iniciarDialogoUmaVez(dialogoId, floatingText, botaoContinuar, falas);
     }
 
     @FXML
     public void proximaFrase() {
-
-        indice++;
-
-        if (indice < falas.length) {
-
-            mostrarTextoLento(falas[indice]);
-
-        } else {
-
-            // Acabaram as frases
-            floatingText.setVisible(false);
-            botaoContinuar.setVisible(false);
-        }
+        App.proximaFraseDialogo(dialogoId, floatingText, botaoContinuar, falas);
     }
     
 }

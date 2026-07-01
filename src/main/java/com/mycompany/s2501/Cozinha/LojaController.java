@@ -79,8 +79,8 @@ public class LojaController {
     private void mostrarRemedio1() {
         mostrarInfo(new Item(
                 1,
-                "Comprimido Azul",
-                "Recupera uma pequena parte da energia do jogador.",
+                "Memorax-Duo",
+                "Dá 2x mais pontos pelo resto do jogo.",
                 0,
                 "/com/mycompany/s2501/loja/c1.png"
         ), 0);
@@ -90,8 +90,8 @@ public class LojaController {
     private void mostrarRemedio2() {
         mostrarInfo(new Item(
                 2,
-                "Comprimido Verde",
-                "Ajuda o jogador a resistir melhor aos efeitos da casa.",
+                "Temprazol-60",
+                "Adiciona +1 minuto na próxima memória.",
                 0,
                 "/com/mycompany/s2501/loja/c2.png"
         ), 0);
@@ -101,8 +101,8 @@ public class LojaController {
     private void mostrarRemedio3() {
         mostrarInfo(new Item(
                 3,
-                "Comprimido Vermelho",
-                "Aumenta temporariamente a força de ação do jogador.",
+                "Oblivionex",
+                "Pula a próxima memória.",
                 0,
                 "/com/mycompany/s2501/loja/c3.png"
         ), 0);
@@ -112,8 +112,8 @@ public class LojaController {
     private void mostrarRemedio4() {
         mostrarInfo(new Item(
                 4,
-                "Comprimido Roxo",
-                "Ajuda o jogador em momentos de maior perigo.",
+                "Lucidralina",
+                "Caminhos, pistas e memórias importantes se tornam mais fáceis de perceber.",
                 0,
                 "/com/mycompany/s2501/loja/c4.png"
         ), 0);
