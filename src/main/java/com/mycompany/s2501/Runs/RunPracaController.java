@@ -458,7 +458,7 @@ private void initialize() {
         posicionarPlayerNoChao();
 
         painelFinal.setVisible(true);
-        mensagemFinalLabel.setText("Você encontrou descanso no silêncio.");
+        mensagemFinalLabel.setText("Ela não queria estar só, apenas não sabia mais chamar alguém.");
 
         fecharDepoisDeAlgunsSegundos();
     }
@@ -481,7 +481,7 @@ private void initialize() {
         painelFinal.setOpacity(0);
         painelFinal.setStyle("-fx-background-color: black;");
 
-        mensagemFinalLabel.setText("A praça escureceu. O descanso não veio.");
+        mensagemFinalLabel.setText("A praça escureceu. O banco parece maior quando se senta sozinha.");
         mensagemFinalLabel.setOpacity(0);
 
         FadeTransition fadeTelaPreta = new FadeTransition(Duration.seconds(2.5), painelFinal);

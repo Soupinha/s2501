@@ -5,22 +5,23 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-image: url('/com/mycompany/s2501/jogotlp/sala2.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" 
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" 
+            style="-fx-background-image: url('/com/mycompany/s2501/jogotlp/diario/d2.png');        
+-fx-background-size: cover;        -fx-background-repeat: no-repeat;" 
             xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" 
-            fx:controller="com.mycompany.s2501.Sala.SofaController">
-            <!--Tudo okay-->
+            fx:controller="com.mycompany.s2501.Quarto.DiarioActController">
+ 
     <children>
-        <Label layoutX="550.0" layoutY="100.0" text="" />
-        
+        <Label text="" />
         <Button layoutX="1140.0" 
                 layoutY="20.0" 
                 onAction="#abrirInventario" 
                 text="🎒" />
-        
-        <Button fx:id="sofa" 
-                layoutX="700.0" 
-                layoutY="580.0" 
-                onAction="#tv" 
+
+        <Button fx:id="diario" 
+                layoutX="505.0" 
+                layoutY="410.0" 
+                onAction="voltarpagina"
                 prefHeight="15.0" 
                 prefWidth="15.0" 
                 style="-fx-background-radius: 100em;                    
@@ -32,14 +33,14 @@
                         -fx-background-color: #ffffff;">
 
             <tooltip>
-                <Tooltip text="Ver Tv" />
+                <Tooltip text="Voltar a página" />
             </tooltip>
         </Button>
         
         
         <Button fx:id="voltar" 
-                layoutX="600.0" 
-                layoutY="780.0" 
+                layoutX="680.0" 
+                layoutY="300.0" 
                 onAction="#voltar" 
                 prefHeight="15.0" 
                 prefWidth="15.0" 
@@ -55,10 +56,6 @@
                 <Tooltip text="Voltar" />
             </tooltip>
         </Button>
-        
-        
-        
-        
-        
     </children>
+        
 </AnchorPane>

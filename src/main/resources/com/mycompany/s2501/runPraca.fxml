@@ -56,7 +56,7 @@
                        prefHeight="160.0"
                        alignment="CENTER"
                        wrapText="true"
-                       text="Run Praça&#10;&#10;Use A/D ou ←/→ para andar.&#10;Use E para interagir.&#10;&#10;Dica: é muito melhor ter uma companhia para descansar."
+                       text=" Converse pela praça até encontrar uma companhia.&#10;&#10;Use A/D ou ←/→ para andar.&#10;Use E para interagir.&#10;&#10;Dica: Às vezes, a solidão chega antes da noite."
                        style="-fx-text-fill: white;
                               -fx-font-size: 22px;
                               -fx-font-weight: bold;" />
