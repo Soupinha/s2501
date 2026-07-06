@@ -9,7 +9,7 @@
             style="-fx-background-image: url('/com/mycompany/s2501/jogotlp/final1.png');        -fx-background-size: cover;        -fx-background-repeat: no-repeat;" 
             xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" 
             fx:controller="com.mycompany.s2501.Corredor.FinalController">
-            <!--Tudo okay-->
+            <!--Tudo okayddd-->
     <children>
         
        <Label fx:id="floatingText"
