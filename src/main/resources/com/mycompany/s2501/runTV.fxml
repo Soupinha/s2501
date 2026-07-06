@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane fx:id="root"
+            prefWidth="600.0"
+            prefHeight="560.0"
+            focusTraversable="true"
+            xmlns="http://javafx.com/javafx/13"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mycompany.s2501.Runs.RunTVController">
+
+    <children>
+
+        <AnchorPane fx:id="barraArea"
+                    layoutX="0.0"
+                    layoutY="0.0"
+                    prefWidth="600.0"
+                    prefHeight="70.0"
+                    style="-fx-background-color: black;">
+
+            <children>
+                <Label fx:id="tempoLabel"
+                       layoutX="25.0"
+                       layoutY="22.0"
+                       prefWidth="120.0"
+                       prefHeight="28.0"
+                       text="Tempo: 150"
+                       style="-fx-text-fill: white;
+                              -fx-font-size: 14px;
+                              -fx-font-family: 'Times New Roman';" />
+
+                <ProgressBar fx:id="sinalBar"
+                             layoutX="150.0"
+                             layoutY="24.0"
+                             prefWidth="300.0"
+                             prefHeight="22.0"
+                             progress="0.0" />
+
+                <Label fx:id="porcentagemLabel"
+                       layoutX="465.0"
+                       layoutY="22.0"
+                       prefWidth="100.0"
+                       prefHeight="28.0"
+                       text="0%"
+                       style="-fx-text-fill: white;
+                              -fx-font-size: 14px;
+                              -fx-font-family: 'Times New Roman';" />
+            </children>
+        </AnchorPane>
+
+        <AnchorPane fx:id="tvScreen"
+                    layoutX="0.0"
+                    layoutY="70.0"
+                    prefWidth="600.0"
+                    prefHeight="300.0"
+                    style="-fx-background-color: #777777;">
+
+            <children>
+                <Rectangle fx:id="falha1"
+                           x="0.0"
+                           y="35.0"
+                           width="600.0"
+                           height="12.0"
+                           opacity="0.45"
+                           style="-fx-fill: rgba(255,255,255,0.50);" />
+
+                <Rectangle fx:id="falha2"
+                           x="0.0"
+                           y="95.0"
+                           width="600.0"
+                           height="8.0"
+                           opacity="0.35"
+                           style="-fx-fill: rgba(0,0,0,0.55);" />
+
+                <Rectangle fx:id="falha3"
+                           x="0.0"
+                           y="150.0"
+                           width="600.0"
+                           height="18.0"
+                           opacity="0.30"
+                           style="-fx-fill: rgba(230,230,230,0.45);" />
+
+                <Rectangle fx:id="falha4"
+                           x="0.0"
+                           y="215.0"
+                           width="600.0"
+                           height="10.0"
+                           opacity="0.40"
+                           style="-fx-fill: rgba(20,20,20,0.55);" />
+
+                <Rectangle fx:id="falha5"
+                           x="0.0"
+                           y="260.0"
+                           width="600.0"
+                           height="14.0"
+                           opacity="0.30"
+                           style="-fx-fill: rgba(255,255,255,0.45);" />
+            </children>
+        </AnchorPane>
+
+        <AnchorPane fx:id="skillFundo"
+                    layoutX="0.0"
+                    layoutY="370.0"
+                    prefWidth="600.0"
+                    prefHeight="190.0"
+                    style="-fx-background-color: black;">
+
+            <children>
+                <AnchorPane fx:id="skillArea"
+                            layoutX="90.0"
+                            layoutY="55.0"
+                            prefWidth="420.0"
+                            prefHeight="30.0"
+                            style="-fx-background-color: rgba(255,255,255,0.12);
+                                   -fx-background-radius: 8px;">
+
+                    <children>
+                        <Rectangle fx:id="zonaAcerto"
+                                   x="170.0"
+                                   y="4.0"
+                                   width="70.0"
+                                   height="22.0"
+                                   arcWidth="6.0"
+                                   arcHeight="6.0"
+                                   style="-fx-fill: rgba(80, 180, 255, 0.85);" />
+
+                        <Rectangle fx:id="marcador"
+                                   x="0.0"
+                                   y="2.0"
+                                   width="10.0"
+                                   height="26.0"
+                                   arcWidth="5.0"
+                                   arcHeight="5.0"
+                                   style="-fx-fill: white;" />
+                    </children>
+                </AnchorPane>
+
+                <Label fx:id="instrucaoLabel"
+                       layoutX="90.0"
+                       layoutY="100.0"
+                       prefWidth="420.0"
+                       prefHeight="25.0"
+                       alignment="CENTER"
+                       text="Aperte ESPAÇO quando o marcador passar pela área azul"
+                       style="-fx-text-fill: white;
+                              -fx-font-size: 14px;
+                              -fx-font-family: 'Times New Roman';" />
+            </children>
+        </AnchorPane>
+
+        <AnchorPane fx:id="painelInicio"
+                    prefWidth="600.0"
+                    prefHeight="560.0"
+                    style="-fx-background-color: rgba(0,0,0,0.82);">
+
+            <children>
+                <Label layoutX="70.0"
+                       layoutY="145.0"
+                       prefWidth="460.0"
+                       prefHeight="135.0"
+                       alignment="CENTER"
+                       wrapText="true"
+                       text="A televisão está chiando.&#10;&#10;Aperte ESPAÇO quando o marcador estiver dentro da área azul.&#10;Quanto mais acertos, mais a tela estabiliza.&#10;&#10;Você tem 2 minutos e 30 segundos."
+                       style="-fx-text-fill: white;
+                              -fx-font-size: 18px;
+                              -fx-font-family: 'Times New Roman';
+                              -fx-font-weight: bold;" />
+
+                <Button layoutX="235.0"
+                        layoutY="340.0"
+                        prefWidth="130.0"
+                        prefHeight="35.0"
+                        text="COMEÇAR"
+                        onAction="#iniciarJogo" />
+            </children>
+        </AnchorPane>
+
+        <AnchorPane fx:id="painelFinal"
+                    prefWidth="600.0"
+                    prefHeight="560.0"
+                    visible="false"
+                    style="-fx-background-color: black;">
+
+            <children>
+                <Label fx:id="mensagemFinalLabel"
+                       layoutX="75.0"
+                       layoutY="230.0"
+                       prefWidth="450.0"
+                       prefHeight="100.0"
+                       alignment="CENTER"
+                       wrapText="true"
+                       text=""
+                       style="-fx-text-fill: white;
+                              -fx-font-size: 22px;
+                              -fx-font-family: 'Times New Roman';
+                              -fx-font-weight: bold;" />
+            </children>
+        </AnchorPane>
+
+    </children>
+</AnchorPane>
