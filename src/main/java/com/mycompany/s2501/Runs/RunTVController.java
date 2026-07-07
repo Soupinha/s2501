@@ -20,6 +20,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class RunTVController {
 
@@ -73,17 +75,23 @@ public class RunTVController {
 
     private static final String CODIGO_RUN = "RUN_TV";
     private static final String NOME_RUN = "Run TV";
-    private static final int TEMPO_LIMITE_RUN = 150;
+    private static final int TEMPO_LIMITE_RUN = 90;
     private static final double PERDA_POR_SEGUNDO = 0.01;
     private static final double PERDA_POR_ERRO = 0.10;
     private static final double GANHO_POR_ACERTO = 0.08;
-    private static final double VELOCIDADE_MINIMA = 3.2;
-    private static final double VELOCIDADE_MAXIMA = 7.2;
+    private static final double VELOCIDADE_MINIMA = 6.0;
+    private static final double VELOCIDADE_MAXIMA = 14.0;
 
     private final Random random = new Random();
 
     private AnimationTimer gameLoop;
     private Timeline tempoTimeline;
+    
+    @FXML
+    private ImageView imagemTV;
+
+    private Image[] imagensTV;
+    private int imagemAtual = -1;
 
     private boolean jogoRodando = false;
     private boolean jogoIniciado = false;
@@ -106,6 +114,7 @@ public class RunTVController {
         root.setFocusTraversable(true);
 
         sinalBar.setProgress(0);
+        carregarImagensTV();
         atualizarTelaPorProgresso();
 
         registrarFechamentoDaJanela();
@@ -119,6 +128,26 @@ public class RunTVController {
                 tentarAcerto();
             }
         });
+    }
+    
+    
+    private void carregarImagensTV() {
+        imagensTV = new Image[]{
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runtv/stv1.jpg")),
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runtv/stv2.png")),
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runtv/stv3.jpg")),
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runtv/stv4.jpg")),
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runtv/stv5.jpg")),
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runtv/stv6.jpg")),
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runtv/stv7.jpg")),
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runtv/stv8.jpg")),
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runtv/stv9.png")),
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runtv/stv10.jpg")),
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runtv/stv11.jpg")),
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runtv/stv12.jpg")),
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runtv/stv13.jpg")),
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runtv/stv14.jpg"))
+        };
     }
 
     private void registrarFechamentoDaJanela() {
@@ -301,6 +330,8 @@ public class RunTVController {
         falha3.setOpacity(opacidadeFalha * 0.9);
         falha4.setOpacity(opacidadeFalha * 0.75);
         falha5.setOpacity(opacidadeFalha * 0.85);
+        
+        atualizarImagemTV();
     }
 
     private void atualizarRuidoVisual(long now) {
@@ -336,6 +367,29 @@ public class RunTVController {
         falha.setY(random.nextInt(286));
         falha.setHeight(4 + random.nextInt(18));
         falha.setOpacity(Math.max(0.03, intensidade * (0.18 + random.nextDouble() * 0.38)));
+    }
+    
+    private void atualizarImagemTV() {
+        if (imagensTV == null || imagensTV.length == 0 || imagemTV == null) {
+            return;
+        }
+
+        int novoIndice = (int) Math.floor(progresso * imagensTV.length);
+
+        if (novoIndice >= imagensTV.length) {
+            novoIndice = imagensTV.length - 1;
+        }
+
+        if (novoIndice < 0) {
+            novoIndice = 0;
+        }
+
+        if (novoIndice != imagemAtual) {
+            imagemAtual = novoIndice;
+            imagemTV.setImage(imagensTV[imagemAtual]);
+        }
+
+        imagemTV.setOpacity(0.20 + (progresso * 0.80));
     }
 
     private int limitarCor(int valor) {

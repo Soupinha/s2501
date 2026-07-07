@@ -45,8 +45,8 @@ public class RunPracaController {
     private final double larguraPlayer = 160;
     private final double alturaPlayer = 230;
 
-    private final double larguraNpc = larguraPlayer;
-    private final double alturaNpc = alturaPlayer;
+    private final double larguraNpc = 120;
+    private final double alturaNpc = 230;
 
     private final double distanciaInteracaoNpc = 140;
     
@@ -108,8 +108,13 @@ public class RunPracaController {
     private Image playerSit;
 
     private Image[] playerWalkFrames;
+    private Image[] npcWalkFrames;
+
     private int walkFrameAtual = 0;
+    private int npcFrameAtual = 0;
+
     private long ultimoFrameTroca = 0;
+    private long ultimoFrameNpcTroca = 0;
 
     @FXML
 private void initialize() {
@@ -187,8 +192,17 @@ private void initialize() {
         playerWalkFrames = new Image[]{
             new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runp/walk1.png")),
             new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runp/walk2.png")),
-            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runp/walk3.png"))
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runp/walk3.png")),
+            
         };
+        
+        npcWalkFrames = new Image[]{
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runp/npc/npcw1.png")),
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runp/npc/npcw2.png")),
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runp/npc/npcw3.png")),
+            new Image(App.class.getResourceAsStream("/com/mycompany/s2501/runp/npc/npcw2.png"))
+        };
+        
     }
 
     private void posicionarPlayerNoChao() {
@@ -222,6 +236,8 @@ private void initialize() {
         iniciarSpawnNpc();
         iniciarLoop();
     }
+    
+ 
 
     private void iniciarTempo() {
         tempoLabel.setText("Tempo: " + tempoRestante);
@@ -281,7 +297,7 @@ private void initialize() {
             @Override
             public void handle(long now) {
                 moverPlayer(now);
-                moverNpcs();
+                moverNpcs(now);
             }
         };
 
@@ -337,56 +353,79 @@ private void initialize() {
         }
     }
     private void criarNpc() {
-        ImageView npc = new ImageView(playerSide);
+        ImageView npc = new ImageView(npcWalkFrames[0]);
 
-        npc.setFitWidth(larguraNpc);
         npc.setFitHeight(alturaNpc);
         npc.setPreserveRatio(true);
+        npc.setSmooth(false);
 
         boolean vemDaEsquerda = random.nextBoolean();
 
         if (vemDaEsquerda) {
             npc.setLayoutX(-larguraNpc);
 
-            // Como a imagem side.png olha para a esquerda,
-            // para andar para a direita precisa espelhar.
+            // O sprite original olha/anda para a esquerda.
+            // Para ir para a direita, precisa espelhar.
             npc.setScaleX(-1);
 
             npc.setUserData("direita");
         } else {
             npc.setLayoutX(larguraTela + larguraNpc);
 
-            // Indo para a esquerda, usa a imagem normal.
+            // Indo para a esquerda, usa normal.
             npc.setScaleX(1);
 
             npc.setUserData("esquerda");
         }
 
-        npc.setLayoutY(chaoY - npc.getFitHeight());
+        npc.setLayoutY(chaoY - alturaNpc);
 
         npcs.add(npc);
         npcLayer.getChildren().add(npc);
     }
     
     
-    private void moverNpcs() {
+    private void moverNpcs(long now) {
+        animarNpcs(now);
+
         Iterator<ImageView> iterator = npcs.iterator();
 
         while (iterator.hasNext()) {
             ImageView npc = iterator.next();
 
+            npc.setImage(npcWalkFrames[npcFrameAtual]);
+            npc.setFitHeight(alturaNpc);
+            npc.setPreserveRatio(true);
+            npc.setSmooth(false);
+
             String direcao = (String) npc.getUserData();
 
             if ("direita".equals(direcao)) {
                 npc.setLayoutX(npc.getLayoutX() + velocidadeNpc);
+                npc.setScaleX(-1);
             } else {
                 npc.setLayoutX(npc.getLayoutX() - velocidadeNpc);
+                npc.setScaleX(1);
             }
+
+            npc.setLayoutY(chaoY - alturaNpc);
 
             if (npc.getLayoutX() < -larguraNpc - 40 || npc.getLayoutX() > larguraTela + larguraNpc + 40) {
                 npcLayer.getChildren().remove(npc);
                 iterator.remove();
             }
+        }
+    }
+    
+    private void animarNpcs(long now) {
+        if (now - ultimoFrameNpcTroca > 180_000_000) {
+            npcFrameAtual++;
+
+            if (npcFrameAtual >= npcWalkFrames.length) {
+                npcFrameAtual = 0;
+            }
+
+            ultimoFrameNpcTroca = now;
         }
     }
 
@@ -409,7 +448,7 @@ private void initialize() {
         double centroPlayer = player.getLayoutX() + player.getFitWidth() / 2;
 
         for (ImageView npc : npcs) {
-            double centroNpc = npc.getLayoutX() + npc.getFitWidth() / 2;
+            double centroNpc = npc.getLayoutX() + larguraNpc / 2;
             double distancia = Math.abs(centroPlayer - centroNpc);
 
             if (distancia < distanciaInteracaoNpc) {
@@ -423,13 +462,9 @@ private void initialize() {
     private void mandarNpcEmbora(ImageView npc) {
         if (npc.getLayoutX() < player.getLayoutX()) {
             npc.setUserData("esquerda");
-
-            // Indo embora para a esquerda.
             npc.setScaleX(1);
         } else {
             npc.setUserData("direita");
-
-            // Indo embora para a direita.
             npc.setScaleX(-1);
         }
     }

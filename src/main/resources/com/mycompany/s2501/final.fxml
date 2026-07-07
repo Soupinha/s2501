@@ -12,30 +12,41 @@
             <!--Tudo okayddd-->
     <children>
         
-       <Label fx:id="floatingText"
-       layoutX="350"
-       layoutY="680"
-       text=""
-       prefWidth="500"
-       wrapText="true"
-       alignment="CENTER"
-       style="-fx-text-fill: white;
-              -fx-font-size: 28;
-              -fx-background-color: rgba(0,0,0,0.2);" />
-        
-        <Button fx:id="botaoContinuar"
-        text="Continuar"
-        layoutX="540"
-        layoutY="720"
-        onAction="#proximaFrase"
-        style="-fx-background-color: transparent;
-               -fx-text-fill: #d7d2c8;
-               -fx-border-color: #6e6558;
-               -fx-border-width: 0 0 1.5 0;
-               -fx-font-family: 'Times New Roman';
-               -fx-font-size: 20px;
-               -fx-cursor: hand;" 
-        />
+        <AnchorPane fx:id="painelPreto"
+                prefHeight="800.0"
+                prefWidth="1200.0"
+                visible="false"
+                style="-fx-background-color: black;">
+
+        <children>
+            <Label fx:id="fraseFinalLabel"
+                   layoutX="300.0"
+                   layoutY="330.0"
+                   prefWidth="600.0"
+                   prefHeight="120.0"
+                   alignment="CENTER"
+                   wrapText="true"
+                   text=""
+                   style="-fx-text-fill: white;
+                          -fx-font-size: 32px;
+                          -fx-font-family: 'Times New Roman';
+                          -fx-font-weight: bold;" />
+            
+            <Button fx:id="botaoContinuarFinal"
+                  layoutX="535.0"
+                  layoutY="455.0"
+                  onAction="#proximaFraseFinal"
+                  text="Continuar"
+                  visible="false"
+                  style="-fx-background-color: transparent;
+                         -fx-text-fill: #d7d2c8;
+                         -fx-border-color: #6e6558;
+                         -fx-border-width: 0 0 1.5 0;
+                         -fx-font-family: 'Times New Roman';
+                         -fx-font-size: 20px;
+                         -fx-cursor: hand;" />
+        </children>
+    </AnchorPane>
         
     </children>
 </AnchorPane>

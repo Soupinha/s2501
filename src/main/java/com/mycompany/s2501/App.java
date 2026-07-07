@@ -21,6 +21,9 @@ import com.mycompany.s2501.Cozinha.LojaController;
 import com.mycompany.s2501.dao.HistoricoPartidaDAO;
 import com.mycompany.s2501.dao.JogadorDAO;
 import javafx.application.Platform;
+import javafx.animation.FadeTransition;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
 public class App extends Application {
 
@@ -106,8 +109,31 @@ public class App extends Application {
         }
     }    
 
-    
-    
+    public static void transicaoParaFinal() {
+        Parent telaAtual = scene.getRoot();
+
+        AnchorPane telaPreta = new AnchorPane();
+        telaPreta.setStyle("-fx-background-color: black;");
+        telaPreta.setOpacity(0.0);
+
+        StackPane transicao = new StackPane(telaAtual, telaPreta);
+        scene.setRoot(transicao);
+
+        FadeTransition fade = new FadeTransition(Duration.seconds(2.5), telaPreta);
+        fade.setFromValue(0.0);
+        fade.setToValue(1.0);
+
+        fade.setOnFinished(event -> {
+            try {
+                setRoot("final");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        fade.play();
+    }
+
     
     
     public static void encerrarJogo() {
@@ -270,6 +296,16 @@ public class App extends Application {
             lojaStage.show();
             lojaStage.toFront();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void finalizarPartidaEIrRanking() {
+        finalizarPartida(true);
+
+        try {
+            setRoot("ranking");
         } catch (IOException e) {
             e.printStackTrace();
         }

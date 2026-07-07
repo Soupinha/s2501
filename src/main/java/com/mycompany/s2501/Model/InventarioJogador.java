@@ -83,7 +83,7 @@ public class InventarioJogador {
                 "Fragmento de Chave " + numeroFragmento + "/4",
                 "Um pedaço da chave do quarto trancado.",
                 0,
-                "/com/mycompany/s2501/jogotlp/f1.png"
+                "/com/mycompany/s2501/jogotlp/key1.png"
         );
 
         itens.put(idFragmento, fragmento);

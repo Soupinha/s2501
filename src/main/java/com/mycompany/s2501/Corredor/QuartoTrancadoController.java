@@ -12,7 +12,7 @@ public class QuartoTrancadoController {
     @FXML
     private void irfinal() throws IOException {
         if (EstadoJogo.isQuartoDesbloqueado()) {
-            App.setRoot("final");
+            App.transicaoParaFinal();
         } else {
             App.pontuarEventoUmaVez("TENTOU_QUARTO_TRANCADO", 5);
             floatingText.setVisible(true);
